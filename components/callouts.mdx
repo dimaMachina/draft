@@ -1,0 +1,160 @@
+---
+title: "Callout Components: Notes, Tips, Warnings & More"
+sidebarTitle: "Callouts"
+description: "Use Mintlify callout components — Note, Tip, Warning, Danger, Info, and Check — to highlight important information in your docs."
+---
+
+Callout components let you draw your reader's attention to information that deserves special emphasis. Mintlify provides six distinct callout types — each with a unique color and icon — so you can communicate the right tone and urgency at a glance. Use them sparingly and deliberately: a page full of callouts loses its impact quickly.
+
+---
+
+## Note
+
+Use `<Note>` when you want to surface important context that readers should keep in mind — but that isn't urgent enough to be a warning. It's the most neutral of the callout types.
+
+<Note>
+  Mintlify automatically reloads your docs preview whenever you save a file. You don't need to restart the dev server between edits.
+</Note>
+
+**Source:**
+
+```mdx Note example
+<Note>
+  Mintlify automatically reloads your docs preview whenever you save a file.
+  You don't need to restart the dev server between edits.
+</Note>
+```
+
+---
+
+## Tip
+
+Use `<Tip>` to share best practices, shortcuts, or recommendations that help readers get the most out of a feature. Tips are positive and forward-looking.
+
+<Tip>
+  Keep your `docs.json` navigation in sync with your file structure. Running `mintlify dev` will warn you about any pages that are missing from the nav.
+</Tip>
+
+**Source:**
+
+```mdx Tip example
+<Tip>
+  Keep your `docs.json` navigation in sync with your file structure. Running
+  `mintlify dev` will warn you about any pages that are missing from the nav.
+</Tip>
+```
+
+---
+
+## Warning
+
+Use `<Warning>` when an action or configuration could lead to unintended consequences — data loss, broken builds, or unexpected behavior — if the reader isn't careful.
+
+<Warning>
+  Renaming a page's slug changes its public URL. Any external links pointing to the old URL will return a 404 unless you add a redirect in `docs.json`.
+</Warning>
+
+**Source:**
+
+```mdx Warning example
+<Warning>
+  Renaming a page's slug changes its public URL. Any external links pointing
+  to the old URL will return a 404 unless you add a redirect in `docs.json`.
+</Warning>
+```
+
+---
+
+## Danger
+
+Use `<Danger>` for actions that are irreversible or that could cause serious harm — deleting data, revoking credentials, or wiping a production environment.
+
+<Danger>
+  Rotating your API secret key immediately invalidates all existing tokens. Every integration using the old key will stop working until it is updated. There is no way to recover the previous key.
+</Danger>
+
+**Source:**
+
+```mdx Danger example
+<Danger>
+  Rotating your API secret key immediately invalidates all existing tokens.
+  Every integration using the old key will stop working until it is updated.
+  There is no way to recover the previous key.
+</Danger>
+```
+
+---
+
+## Info
+
+Use `<Info>` to provide supplemental background, definitions, or contextual details that are helpful but not essential to the core task. Think of it as an aside.
+
+<Info>
+  Mintlify uses MDX under the hood, which means every `.mdx` file supports both standard Markdown syntax and JSX-style React components side by side.
+</Info>
+
+**Source:**
+
+```mdx Info example
+<Info>
+  Mintlify uses MDX under the hood, which means every `.mdx` file supports
+  both standard Markdown syntax and JSX-style React components side by side.
+</Info>
+```
+
+---
+
+## Check
+
+Use `<Check>` to confirm that a step was completed successfully, to mark the end of a setup process, or to let readers know they've reached a good state.
+
+<Check>
+  **Setup complete!** Your Mintlify project is now running locally at `http://localhost:3000`. Every change you save will appear in the preview instantly.
+</Check>
+
+**Source:**
+
+```mdx Check example
+<Check>
+  **Setup complete!** Your Mintlify project is now running locally at
+  `http://localhost:3000`. Every change you save will appear in the preview instantly.
+</Check>
+```
+
+---
+
+## When to Use Each Type
+
+Use the accordion below as a quick reference guide when deciding which callout fits your situation.
+
+<AccordionGroup>
+  <Accordion title="Note — important context">
+    Use `<Note>` when you need to highlight a fact that readers might otherwise miss. It suits clarifications, caveats, and reminders that are relevant to the current section without being alarming. For example: "Note that this setting only applies to Pro and Enterprise plans."
+  </Accordion>
+
+  <Accordion title="Tip — best practices and shortcuts">
+    Use `<Tip>` when you want to share an expert recommendation, a performance trick, or a workflow shortcut. Tips should be actionable and positive. For example: "Tip: You can use environment variables in `docs.json` to manage different base URLs across staging and production."
+  </Accordion>
+
+  <Accordion title="Warning — potential problems">
+    Use `<Warning>` when a reader could easily make a mistake that causes frustration or extra work — but not permanent damage. Use it before a step that has a common gotcha, or when a configuration option has surprising default behavior.
+  </Accordion>
+
+  <Accordion title="Danger — critical or destructive actions">
+    Reserve `<Danger>` for steps that are truly irreversible or that carry significant risk: deleting accounts, wiping databases, revoking access tokens, or overwriting production data. Because it's visually alarming, overusing it dilutes its impact.
+  </Accordion>
+
+  <Accordion title="Info — supplemental background">
+    Use `<Info>` when you want to add context without interrupting the main flow. It's ideal for definitions, historical background, links to related reading, or explanations of why something works the way it does.
+  </Accordion>
+
+  <Accordion title="Check — confirmation and success">
+    Use `<Check>` at the end of a setup section, after a multi-step process, or whenever you want to give readers a clear signal that they've reached a valid state. It's a great way to cap off an onboarding guide or a "Getting Started" page.
+  </Accordion>
+</AccordionGroup>
+
+---
+
+<Tip>
+  Resist the urge to wrap every interesting sentence in a callout. When everything is highlighted, nothing is. Aim to use no more than two or three callouts per page, and always ask yourself whether the information could live naturally in the prose instead.
+</Tip>

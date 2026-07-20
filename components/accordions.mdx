@@ -1,0 +1,152 @@
+---
+title: "Accordions: Collapsible Content Sections"
+sidebarTitle: "Accordions"
+description: "Add Accordion and AccordionGroup components to collapse long reference content or FAQ sections and keep your pages clean and scannable."
+---
+
+Accordions hide supplementary or optional content behind a clickable toggle, keeping your pages focused on what most readers need. Use them for FAQs, detailed reference material, advanced configuration options, or any section where only a subset of readers will want the full detail. By collapsing verbose content, you make pages faster to scan without removing any information.
+
+<Info>
+  Reach for accordions when your page contains long FAQ lists, optional deep-dive details, or reference content that most readers can safely skip. Avoid using them for critical information that every reader must see — callouts or inline prose work better for required reading.
+</Info>
+
+---
+
+## Single Accordion
+
+A single `<Accordion>` wraps any MDX content behind a collapsible toggle. The `title` prop sets the visible heading; everything inside the tags is hidden until the reader expands it.
+
+<Accordion title="How does Mintlify's build process work?">
+  When you push changes to your connected Git repository, Mintlify's build pipeline automatically detects the update, compiles your MDX files, and deploys a new version of your documentation site — typically within 30 seconds.
+
+  You can also trigger a local preview at any time using the CLI:
+
+  ```bash Local Preview
+  mintlify dev
+  ```
+
+  The local dev server watches for file changes and hot-reloads your browser automatically, so you can see edits in real time without re-running the command.
+</Accordion>
+
+```jsx Single Accordion
+<Accordion title="How does Mintlify's build process work?">
+  When you push changes to your connected Git repository, Mintlify's build
+  pipeline automatically detects the update, compiles your MDX files, and
+  deploys a new version of your documentation site — typically within 30
+  seconds.
+</Accordion>
+```
+
+---
+
+## AccordionGroup — FAQ Section
+
+Group multiple accordions together with `<AccordionGroup>` so they share a consistent visual container. Only one accordion can be open at a time within a group, keeping the interface tidy.
+
+<AccordionGroup>
+  <Accordion title="Do I need to know React to use Mintlify?">
+    No. You write documentation in standard Markdown or MDX. Mintlify's built-in components — like `<Card>`, `<Tabs>`, and `<Steps>` — work as simple JSX tags without any React knowledge required. If you *do* know React, you can import custom components, but it's completely optional.
+  </Accordion>
+  <Accordion title="Can I use a custom domain for my docs site?">
+    Yes. Add a `CNAME` DNS record pointing to `hosting.mintlify.com`, then add your domain in the Mintlify dashboard under **Settings → Custom Domain**. TLS certificates are provisioned automatically — no extra configuration needed.
+  </Accordion>
+  <Accordion title="How do I add a new page to my documentation?">
+    Create an `.mdx` file anywhere inside your docs directory, then add its path to the `navigation` array in your `docs.json` file. Mintlify picks up the file on the next build and adds it to your sidebar automatically.
+
+    ```json docs.json (partial)
+    {
+      "navigation": [
+        {
+          "group": "Getting Started",
+          "pages": ["quickstart", "your-new-page"]
+        }
+      ]
+    }
+    ```
+  </Accordion>
+  <Accordion title="Is Mintlify free to use?">
+    Mintlify offers a free tier that covers one documentation site with unlimited pages. Paid plans unlock custom domains, additional sites, analytics, password protection, and priority support. Check the [pricing page](https://mintlify.com/pricing) for up-to-date plan details.
+  </Accordion>
+  <Accordion title="Can I version my documentation?">
+    Yes. Mintlify supports multiple documentation versions through version dropdowns. Configure versions in `docs.json` and maintain separate page sets for each version in your repository. Readers switch between versions using the version selector in the navbar.
+  </Accordion>
+</AccordionGroup>
+
+```jsx AccordionGroup FAQ
+<AccordionGroup>
+  <Accordion title="Do I need to know React to use Mintlify?">
+    No. Mintlify's built-in components work as simple JSX tags without any
+    React knowledge required.
+  </Accordion>
+  <Accordion title="Can I use a custom domain for my docs site?">
+    Yes. Add a CNAME DNS record pointing to hosting.mintlify.com, then add
+    your domain in the Mintlify dashboard under Settings → Custom Domain.
+  </Accordion>
+  <Accordion title="How do I add a new page to my documentation?">
+    Create an .mdx file anywhere inside your docs directory, then add its
+    path to the navigation array in your docs.json file.
+  </Accordion>
+</AccordionGroup>
+```
+
+---
+
+## Default-Open Accordion
+
+Add the `defaultOpen` prop to any `<Accordion>` to render it expanded on page load. This is useful for the first item in a FAQ or for a section you want all readers to see immediately.
+
+<Accordion title="Start here — what is Mintlify?" defaultOpen>
+  Mintlify is a documentation platform that turns MDX files in a Git repository into a beautiful, searchable, and interactive documentation site. You write content in Markdown with optional JSX components, connect your repository, and Mintlify handles the build, hosting, and deployment pipeline automatically.
+</Accordion>
+
+```jsx Default-Open Accordion
+<Accordion title="Start here — what is Mintlify?" defaultOpen>
+  Mintlify is a documentation platform that turns MDX files in a Git
+  repository into a beautiful, searchable, and interactive documentation site.
+</Accordion>
+```
+
+---
+
+## Accordion With an Icon
+
+Pass any [Font Awesome](https://fontawesome.com/icons) icon name to the `icon` prop to add a visual indicator alongside the accordion title. Icons help readers scan a long list of accordions at a glance.
+
+<AccordionGroup>
+  <Accordion title="Authentication" icon="lock">
+    All API requests must include a valid API key in the `Authorization` header using the `Bearer` scheme. Rotate your API key at any time from the dashboard without downtime — the old key remains valid for 60 seconds after rotation.
+  </Accordion>
+  <Accordion title="Rate Limits" icon="gauge-high">
+    The API enforces a default rate limit of **1,000 requests per minute** per API key. Exceeding this limit returns a `429 Too Many Requests` response. Implement exponential backoff in your client to handle rate-limit responses gracefully.
+  </Accordion>
+  <Accordion title="Webhooks" icon="webhook">
+    Configure webhook endpoints in the dashboard to receive real-time event notifications. Each webhook delivery includes an `X-Signature-256` header you can use to verify the payload authenticity.
+  </Accordion>
+</AccordionGroup>
+
+```jsx Accordions With Icons
+<AccordionGroup>
+  <Accordion title="Authentication" icon="lock">
+    All API requests must include a valid API key in the Authorization header
+    using the Bearer scheme.
+  </Accordion>
+  <Accordion title="Rate Limits" icon="gauge-high">
+    The API enforces a default rate limit of 1,000 requests per minute per
+    API key. Exceeding this limit returns a 429 Too Many Requests response.
+  </Accordion>
+  <Accordion title="Webhooks" icon="webhook">
+    Configure webhook endpoints in the dashboard to receive real-time event
+    notifications.
+  </Accordion>
+</AccordionGroup>
+```
+
+---
+
+## Available Props
+
+| Prop          | Type      | Required | Description                                                                       |
+|---------------|-----------|----------|-----------------------------------------------------------------------------------|
+| `title`       | `string`  | Yes      | The label displayed on the accordion toggle button.                               |
+| `icon`        | `string`  | No       | A [Font Awesome](https://fontawesome.com/icons) icon name rendered beside the title. |
+| `defaultOpen` | `boolean` | No       | When `true`, the accordion renders in its expanded state on page load.            |

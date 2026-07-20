@@ -1,0 +1,176 @@
+---
+title: "Icons: Font Awesome Icons in Cards and Code Blocks"
+sidebarTitle: "Icons"
+description: "Use Font Awesome icon names in Card, Accordion, Step, and code block components to add visual hierarchy and scannable navigation."
+---
+
+Mintlify uses [Font Awesome 6](https://fontawesome.com/icons) as its icon library. Wherever a Mintlify component accepts an `icon` prop, pass the kebab-case name of any Font Awesome icon — for example `"rocket"`, `"bolt"`, or `"puzzle-piece"` — and Mintlify renders the corresponding glyph automatically. Icons are entirely optional, but they give readers visual anchors that make long navigation lists and reference pages significantly easier to scan.
+
+<Note>
+  Icons are optional on every component that supports them. Skip the `icon` prop if your content is text-heavy or if adding icons would distract rather than clarify. When in doubt, use icons consistently across a whole section rather than mixing icon and icon-free items in the same list.
+</Note>
+
+## Icons in Card Components
+
+Pass the `icon` prop on any `<Card>` to display an icon above the card title. Use a `<CardGroup>` to lay multiple icon cards out in a responsive grid.
+
+<CardGroup cols={3}>
+  <Card title="Getting Started" icon="rocket">
+    Ship your first doc in minutes with Mintlify's quickstart guide.
+  </Card>
+  <Card title="Performance" icon="bolt">
+    Learn how to keep your documentation site fast for every reader.
+  </Card>
+  <Card title="API Reference" icon="code">
+    Auto-generate interactive API reference pages from an OpenAPI spec.
+  </Card>
+  <Card title="Guides" icon="book">
+    Step-by-step walkthroughs for common documentation patterns.
+  </Card>
+  <Card title="Configuration" icon="gear">
+    Customise navigation, themes, and site settings in `docs.json`.
+  </Card>
+  <Card title="Security" icon="shield">
+    Protect docs with password authentication or SSO.
+  </Card>
+</CardGroup>
+
+```mdx title="Cards with icons"
+<CardGroup cols={3}>
+  <Card title="Getting Started" icon="rocket">
+    Ship your first doc in minutes with Mintlify's quickstart guide.
+  </Card>
+  <Card title="Performance" icon="bolt">
+    Learn how to keep your documentation site fast for every reader.
+  </Card>
+  <Card title="API Reference" icon="code">
+    Auto-generate interactive API reference pages from an OpenAPI spec.
+  </Card>
+  <Card title="Guides" icon="book">
+    Step-by-step walkthroughs for common documentation patterns.
+  </Card>
+  <Card title="Configuration" icon="gear">
+    Customise navigation, themes, and site settings in `docs.json`.
+  </Card>
+  <Card title="Security" icon="shield">
+    Protect docs with password authentication or SSO.
+  </Card>
+</CardGroup>
+```
+
+## Icons in Accordion Components
+
+Add `icon` to any `<Accordion>` to display an icon next to the accordion's title in both its collapsed and expanded states.
+
+<AccordionGroup>
+  <Accordion title="Authentication" icon="key">
+    Configure API key, OAuth 2.0, or JWT authentication for your endpoints. Each method uses a different `securitySchemes` entry in your OpenAPI spec.
+  </Accordion>
+  <Accordion title="CLI Reference" icon="terminal">
+    The Mintlify CLI lets you preview your docs locally, check for broken links, and deploy changes without leaving your terminal.
+  </Accordion>
+  <Accordion title="Integrations" icon="puzzle-piece">
+    Connect Mintlify to Slack, GitHub, Segment, and dozens of other tools through the integrations dashboard.
+  </Accordion>
+</AccordionGroup>
+
+```mdx title="Accordions with icons"
+<AccordionGroup>
+  <Accordion title="Authentication" icon="key">
+    Configure API key, OAuth 2.0, or JWT authentication for your endpoints.
+    Each method uses a different `securitySchemes` entry in your OpenAPI spec.
+  </Accordion>
+  <Accordion title="CLI Reference" icon="terminal">
+    The Mintlify CLI lets you preview your docs locally, check for broken
+    links, and deploy changes without leaving your terminal.
+  </Accordion>
+  <Accordion title="Integrations" icon="puzzle-piece">
+    Connect Mintlify to Slack, GitHub, Segment, and dozens of other tools
+    through the integrations dashboard.
+  </Accordion>
+</AccordionGroup>
+```
+
+## Icons in Code Block Headers
+
+Add an `icon` meta option directly to a fenced code block to render a small icon in the code block's title bar. Combine it with `title` to give the block a labelled, visually distinct header.
+
+````mdx title="Code block with icon meta"
+```bash icon="terminal" title="Install the Mintlify CLI"
+npm install -g mintlify
+```
+````
+
+```bash icon="terminal" title="Install the Mintlify CLI"
+npm install -g mintlify
+```
+
+## Popular Icons Reference
+
+The grid below shows nine commonly-used icons and their typical documentation use cases. Each icon name is the exact string you pass to the `icon` prop.
+
+<CardGroup cols={3}>
+  <Card title="rocket" icon="rocket">
+    Getting Started — onboarding, quickstart, and first-run flows.
+  </Card>
+  <Card title="code" icon="code">
+    API Reference — endpoint listings and code examples.
+  </Card>
+  <Card title="book" icon="book">
+    Guides — tutorials, how-tos, and conceptual overviews.
+  </Card>
+  <Card title="gear" icon="gear">
+    Configuration — settings files, environment variables, options.
+  </Card>
+  <Card title="shield" icon="shield">
+    Security — authentication, permissions, and compliance topics.
+  </Card>
+  <Card title="bolt" icon="bolt">
+    Performance — optimisation tips and benchmarks.
+  </Card>
+  <Card title="puzzle-piece" icon="puzzle-piece">
+    Integrations — third-party connections and plugin guides.
+  </Card>
+  <Card title="terminal" icon="terminal">
+    CLI — command-line tools, scripts, and shell examples.
+  </Card>
+  <Card title="key" icon="key">
+    Authentication — API keys, OAuth flows, and tokens.
+  </Card>
+</CardGroup>
+
+```mdx title="Icon reference grid"
+<CardGroup cols={3}>
+  <Card title="rocket" icon="rocket">
+    Getting Started — onboarding, quickstart, and first-run flows.
+  </Card>
+  <Card title="code" icon="code">
+    API Reference — endpoint listings and code examples.
+  </Card>
+  <Card title="book" icon="book">
+    Guides — tutorials, how-tos, and conceptual overviews.
+  </Card>
+  <Card title="gear" icon="gear">
+    Configuration — settings files, environment variables, options.
+  </Card>
+  <Card title="shield" icon="shield">
+    Security — authentication, permissions, and compliance topics.
+  </Card>
+  <Card title="bolt" icon="bolt">
+    Performance — optimisation tips and benchmarks.
+  </Card>
+  <Card title="puzzle-piece" icon="puzzle-piece">
+    Integrations — third-party connections and plugin guides.
+  </Card>
+  <Card title="terminal" icon="terminal">
+    CLI — command-line tools, scripts, and shell examples.
+  </Card>
+  <Card title="key" icon="key">
+    Authentication — API keys, OAuth flows, and tokens.
+  </Card>
+</CardGroup>
+```
+
+<Tip>
+  Browse the full Font Awesome 6 Free library at [fontawesome.com/icons](https://fontawesome.com/icons). Filter by **Free** and **Solid** to see every icon available in Mintlify. Copy the icon name in kebab-case — for example `"arrow-right"` or `"circle-check"` — and paste it directly into the `icon` prop.
+</Tip>

@@ -1,0 +1,178 @@
+---
+title: "Cards and CardGroups: Navigation and Feature Grids"
+sidebarTitle: "Cards"
+description: "Use Card and CardGroup components to create navigation hubs, feature grids, and link cards with icons in your Mintlify documentation."
+---
+
+Cards are the primary building block for navigation hubs, feature grids, and quick-reference link sections in Mintlify docs. You can display them individually or group them into responsive grid layouts using `CardGroup`. Every card supports icons, images, colors, and optional `href` links — giving you full control over how readers navigate your content.
+
+---
+
+## Single Card
+
+A single `<Card>` works well for highlighting one feature or linking to a key resource. Pair it with an icon and an `href` to make it immediately actionable.
+
+<Card
+  title="Quickstart Guide"
+  icon="rocket"
+  href="/quickstart"
+>
+  Get your Mintlify documentation site up and running in under five minutes.
+</Card>
+
+```mdx Single Card
+<Card
+  title="Quickstart Guide"
+  icon="rocket"
+  href="/quickstart"
+>
+  Get your Mintlify documentation site up and running in under five minutes.
+</Card>
+```
+
+---
+
+## CardGroup — 2-Column Navigation Grid
+
+Use `<CardGroup cols={2}>` to create a navigation hub with evenly spaced link cards. This layout works best for top-level section pages where you want readers to choose their path.
+
+<CardGroup cols={2}>
+  <Card title="Components" icon="puzzle-piece" href="/components/cards">
+    Explore all interactive UI components available in Mintlify MDX pages.
+  </Card>
+  <Card title="Configurations" icon="gear" href="/introduction">
+    Customize your site's theme, navigation, and global settings in `docs.json`.
+  </Card>
+  <Card title="API References" icon="code" href="/api-reference/overview">
+    Auto-generate interactive API docs from your OpenAPI specification file.
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="/api-reference/endpoints">
+    Track reader engagement and page performance with built-in analytics tools.
+  </Card>
+</CardGroup>
+
+```mdx 2-Column Navigation Grid
+<CardGroup cols={2}>
+  <Card title="Components" icon="puzzle-piece" href="/components/cards">
+    Explore all interactive UI components available in Mintlify MDX pages.
+  </Card>
+  <Card title="Configurations" icon="gear" href="/introduction">
+    Customize your site's theme, navigation, and global settings in `docs.json`.
+  </Card>
+  <Card title="API References" icon="code" href="/api-reference/overview">
+    Auto-generate interactive API docs from your OpenAPI specification file.
+  </Card>
+  <Card title="Analytics" icon="chart-line" href="/api-reference/endpoints">
+    Track reader engagement and page performance with built-in analytics tools.
+  </Card>
+</CardGroup>
+```
+
+---
+
+## CardGroup — 3-Column Feature Overview
+
+Use `<CardGroup cols={3}>` when you have six or more short feature cards. This denser grid suits product overview pages or "what's included" sections.
+
+<CardGroup cols={3}>
+  <Card title="MDX Support" icon="file-code">
+    Write documentation in MDX and mix Markdown with powerful React components.
+  </Card>
+  <Card title="OpenAPI Integration" icon="plug">
+    Import your OpenAPI spec and generate a fully interactive API reference automatically.
+  </Card>
+  <Card title="Custom Domains" icon="globe">
+    Serve your docs from your own domain with a single DNS record change.
+  </Card>
+  <Card title="Dark Mode" icon="moon">
+    Every Mintlify site ships with a built-in light and dark theme toggle.
+  </Card>
+  <Card title="Search" icon="magnifying-glass">
+    AI-powered search is included out of the box — no configuration required.
+  </Card>
+  <Card title="Versioning" icon="code-branch">
+    Maintain multiple documentation versions side by side with version dropdowns.
+  </Card>
+</CardGroup>
+
+```mdx 3-Column Feature Overview
+<CardGroup cols={3}>
+  <Card title="MDX Support" icon="file-code">
+    Write documentation in MDX and mix Markdown with powerful React components.
+  </Card>
+  <Card title="OpenAPI Integration" icon="plug">
+    Import your OpenAPI spec and generate a fully interactive API reference automatically.
+  </Card>
+  <Card title="Custom Domains" icon="globe">
+    Serve your docs from your own domain with a single DNS record change.
+  </Card>
+  <Card title="Dark Mode" icon="moon">
+    Every Mintlify site ships with a built-in light and dark theme toggle.
+  </Card>
+  <Card title="Search" icon="magnifying-glass">
+    AI-powered search is included out of the box — no configuration required.
+  </Card>
+  <Card title="Versioning" icon="code-branch">
+    Maintain multiple documentation versions side by side with version dropdowns.
+  </Card>
+</CardGroup>
+```
+
+---
+
+## Informational Card (No Link)
+
+Omit the `href` prop to create an informational card that doesn't navigate anywhere. Use this style to surface a key fact, requirement, or concept inline with other content.
+
+<Card title="Required Node.js Version" icon="circle-info">
+  Mintlify requires **Node.js 19.00 or higher**. Run `node -v` to check your current version before installing the CLI.
+</Card>
+
+```mdx Informational Card
+<Card title="Required Node.js Version" icon="circle-info">
+  Mintlify requires **Node.js 19.00 or higher**. Run `node -v` to check your
+  current version before installing the CLI.
+</Card>
+```
+
+---
+
+## Card With a Custom Image
+
+Replace the icon with a custom image by passing a URL to the `img` prop. Image cards work well for product logos, screenshots, or brand-specific artwork.
+
+<Card
+  title="Mintlify Documentation Platform"
+  img="https://mintlify.com/logo/light.svg"
+  href="https://mintlify.com"
+>
+  The documentation platform built for developer experience. Beautiful by default, powerful by design.
+</Card>
+
+```mdx Card With a Custom Image
+<Card
+  title="Mintlify Documentation Platform"
+  img="https://mintlify.com/logo/light.svg"
+  href="https://mintlify.com"
+>
+  The documentation platform built for developer experience. Beautiful by
+  default, powerful by design.
+</Card>
+```
+
+---
+
+## Available Props
+
+| Prop          | Type     | Required | Description                                                                 |
+|---------------|----------|----------|-----------------------------------------------------------------------------|
+| `title`       | `string` | Yes      | The bold heading text displayed at the top of the card.                     |
+| `icon`        | `string` | No       | A [Font Awesome](https://fontawesome.com/icons) icon name (e.g. `"rocket"`). |
+| `href`        | `string` | No       | URL or path the card links to. Omit for a purely informational card.        |
+| `img`         | `string` | No       | URL of an image to display instead of an icon.                              |
+| `color`       | `string` | No       | Hex color code used to tint the icon (e.g. `"#FF0000"`).                   |
+| `description` | `string` | No       | Subtitle text rendered below the title (alternative to slot children).      |
+
+<Warning>
+  Never use raw HTML `<div>` elements, Tailwind utility classes, or inline `style` attributes to build card layouts. Always use the Mintlify `<Card>` and `<CardGroup>` components — they handle responsive layout, dark mode, hover states, and accessibility automatically.
+</Warning>

@@ -1,13 +1,11 @@
 {
-  "$schema": "https://mintlify.com/docs.json",
+  "projectType": "saas",
+  "projectName": "Mintlify Component Demo",
+  "projectDescription": "A comprehensive demonstration of every Mintlify documentation component, showcasing callouts, code blocks, cards, tabs, steps, tables, and more.",
   "theme": "luma",
-  "name": "Mintlify Component Demo",
-  "colors": {
-    "primary": "#ef7025",
-    "light": "#eec9bc",
-    "dark": "#4fa1ab"
-  },
-  "favicon": "/favicon.svg",
+  "primaryColor": "#ef7025",
+  "lightColor": "#eec9bc",
+  "darkColor": "#4fa1ab",
   "navigation": {
     "tabs": [
       {
@@ -71,23 +69,33 @@
       }
     ]
   },
-  "navbar": {
-    "links": [
-      {
-        "label": "Mintlify Docs",
-        "href": "https://mintlify.com/docs"
-      }
-    ],
-    "primary": {
-      "type": "button",
-      "label": "Get Started",
-      "href": "https://mintlify.com"
-    }
-  },
-  "footer": {
-    "socials": {
-      "x": "https://x.com/mintlify",
-      "github": "https://github.com/mintlify"
-    }
-  }
+  "keyFeatures": [
+    "Callout components (tip, note, warning, danger, info, check)",
+    "Code blocks with syntax highlighting and copy button",
+    "Card and card group layouts",
+    "Tabbed content panels",
+    "Accordion / expandable sections",
+    "Numbered steps for walkthroughs",
+    "Tables with rich formatting",
+    "Embedded images and video",
+    "Icon library integration",
+    "Interactive buttons and tooltips",
+    "Frame component for screenshots",
+    "API playground with live requests"
+  ],
+  "publicApiSurface": [
+    "Callout (Tip, Note, Warning, Danger, Info, Check)",
+    "CodeBlock",
+    "Card / CardGroup",
+    "Tabs / Tab",
+    "Accordion / AccordionGroup",
+    "Steps / Step",
+    "Table",
+    "Image / Frame",
+    "Video",
+    "Icon",
+    "Button",
+    "Tooltip",
+    "API playground"
+  ]
 }

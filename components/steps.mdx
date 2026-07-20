@@ -1,0 +1,286 @@
+---
+title: "Steps: Numbered Sequential Instructions"
+sidebarTitle: "Steps"
+description: "Use the Steps and Step components to guide readers through multi-step processes with clear numbered sections and rich content per step."
+---
+
+The `<Steps>` component turns a list of `<Step>` blocks into a clean, auto-numbered sequence with a visual connector line. Use it any time you need to guide readers through a process where order matters — installation, configuration, authentication flows, or deployment pipelines. Each step can contain any MDX content: prose, code blocks, callouts, images, or nested lists.
+
+<Note>
+  Each `<Step>` is numbered automatically based on its position inside `<Steps>`. You never assign numbers manually — just add steps in order and Mintlify handles the numbering. Reordering steps in your MDX source immediately reorders the displayed numbers.
+</Note>
+
+<Tip>
+  Keep step titles short and start each one with an action verb: **Install**, **Configure**, **Run**, **Deploy**. Verb-first titles let readers scan the step list and understand the full process at a glance before reading the detail.
+</Tip>
+
+---
+
+## Basic Steps
+
+The simplest form — three steps, each containing a single paragraph of explanation.
+
+<Steps>
+  <Step title="Install the CLI">
+    Install the Mintlify CLI globally so you can run documentation commands from any directory on your machine.
+  </Step>
+  <Step title="Initialize your project">
+    Run the init command inside your project directory. Mintlify creates the folder structure and a starter `docs.json` configuration file for you.
+  </Step>
+  <Step title="Preview your docs">
+    Start the local development server. Your documentation site opens in the browser and hot-reloads whenever you save a file.
+  </Step>
+</Steps>
+
+```jsx Basic Steps
+<Steps>
+  <Step title="Install the CLI">
+    Install the Mintlify CLI globally so you can run documentation commands
+    from any directory on your machine.
+  </Step>
+  <Step title="Initialize your project">
+    Run the init command inside your project directory. Mintlify creates the
+    folder structure and a starter docs.json configuration file for you.
+  </Step>
+  <Step title="Preview your docs">
+    Start the local development server. Your documentation site opens in the
+    browser and hot-reloads whenever you save a file.
+  </Step>
+</Steps>
+```
+
+---
+
+## Steps With Rich Content
+
+Each step can hold any combination of MDX elements. Mix code blocks, callouts, and lists within a single step to give readers everything they need without leaving the numbered sequence.
+
+<Steps>
+  <Step title="Install dependencies">
+    Install the required packages using your preferred package manager:
+
+    <CodeGroup>
+      ```bash npm
+      npm install -g mintlify
+      ```
+      ```bash yarn
+      yarn global add mintlify
+      ```
+      ```bash pnpm
+      pnpm add -g mintlify
+      ```
+    </CodeGroup>
+  </Step>
+  <Step title="Connect your repository">
+    <Warning>
+      You need **admin access** to the repository to complete this step. If you only have write access, ask a repository admin to connect the repo and invite you as a collaborator in the Mintlify dashboard.
+    </Warning>
+
+    Log in to [mintlify.com](https://mintlify.com), navigate to **Dashboard → New Project**, and authorize the GitHub or GitLab integration. Select the repository that contains your docs folder.
+  </Step>
+  <Step title="Configure your navigation">
+    Open `docs.json` and set up your navigation structure. At minimum, define your `name`, `navigation` groups, and the `pages` inside each group:
+
+    ```json docs.json lines
+    {
+      "name": "My Project Docs",
+      "navigation": [
+        {
+          "group": "Getting Started",
+          "pages": [
+            "quickstart",
+            "installation"
+          ]
+        },
+        {
+          "group": "Components",
+          "pages": [
+            "components/cards",
+            "components/tabs"
+          ]
+        }
+      ]
+    }
+    ```
+
+    Key fields to fill in first:
+    - **`name`** — your site's display name in the navbar
+    - **`navigation`** — the ordered list of sidebar groups and pages
+    - **`favicon`** — relative path to your `.ico` or `.svg` file
+  </Step>
+</Steps>
+
+```jsx Steps With Rich Content
+<Steps>
+  <Step title="Install dependencies">
+    Install the required packages using your preferred package manager.
+  </Step>
+  <Step title="Connect your repository">
+    Log in to mintlify.com, navigate to Dashboard → New Project, and
+    authorize the GitHub integration.
+  </Step>
+  <Step title="Configure your navigation">
+    Open docs.json and define your navigation structure.
+  </Step>
+</Steps>
+```
+
+---
+
+## Real Workflow — Create a Mintlify Project From Scratch
+
+This five-step sequence walks through the complete process of creating, previewing, and deploying a new Mintlify documentation site.
+
+<Steps>
+  <Step title="Install the Mintlify CLI">
+    Open your terminal and install the CLI globally with npm:
+
+    ```bash Install CLI
+    npm install -g mintlify
+    ```
+
+    Confirm the installation succeeded:
+
+    ```bash Verify Version
+    mintlify --version
+    ```
+  </Step>
+  <Step title="Initialize a new docs project">
+    Navigate to the directory where you want your docs to live, then run:
+
+    ```bash Initialize Project
+    mintlify init
+    ```
+
+    The CLI scaffolds the following structure:
+
+    ```
+    my-docs/
+    ├── docs.json          # Site configuration
+    ├── introduction.mdx   # Your first page
+    ├── quickstart.mdx
+    └── logo/
+        ├── dark.svg
+        └── light.svg
+    ```
+  </Step>
+  <Step title="Edit your first page">
+    Open `introduction.mdx` in your editor. Update the `title`, `description`, and body content to match your project. Every `.mdx` file must start with a frontmatter block:
+
+    ```markdown introduction.mdx
+    ---
+    title: "Introduction"
+    description: "Welcome to My Project — the fastest way to do the thing."
+    ---
+
+    ## Overview
+
+    My Project helps you accomplish X, Y, and Z with minimal configuration.
+    ```
+  </Step>
+  <Step title="Preview locally">
+    Start the development server from your docs directory:
+
+    ```bash Start Dev Server
+    mintlify dev
+    ```
+
+    Your browser opens at `http://localhost:3000`. The server watches for file changes and updates the preview automatically — no restart needed.
+  </Step>
+  <Step title="Deploy to production">
+    Commit your changes and push them to your connected Git branch:
+
+    ```bash Push to Deploy
+    git add .
+    git commit -m "docs: initial Mintlify setup"
+    git push origin main
+    ```
+
+    Mintlify detects the push, builds your site, and deploys it within ~30 seconds. Visit your dashboard to see the live URL.
+
+    <Check>
+      Your documentation site is live! Share the URL with your team and start adding pages.
+    </Check>
+  </Step>
+</Steps>
+
+```jsx Full Workflow Steps
+<Steps>
+  <Step title="Install the Mintlify CLI">
+    npm install -g mintlify
+  </Step>
+  <Step title="Initialize a new docs project">
+    mintlify init
+  </Step>
+  <Step title="Edit your first page">
+    Open introduction.mdx and update title, description, and body content.
+  </Step>
+  <Step title="Preview locally">
+    mintlify dev
+  </Step>
+  <Step title="Deploy to production">
+    git add . && git commit -m "docs: initial setup" && git push origin main
+  </Step>
+</Steps>
+```
+
+---
+
+## Nested Steps
+
+When a step in your sequence requires its own ordered sub-steps, nest a `<Steps>` block inside the parent `<Step>`. Use nested steps sparingly — if the nesting goes more than one level deep, consider breaking the content into separate pages.
+
+<Steps>
+  <Step title="Configure authentication">
+    Set up your authentication provider by completing the following sub-steps:
+
+    <Steps>
+      <Step title="Create an API key">
+        Navigate to **Dashboard → API Keys** and click **Generate New Key**. Give it a descriptive name like `production-server` and set an expiry policy.
+      </Step>
+      <Step title="Store the key securely">
+        Add the key to your environment variables — never commit it to source control:
+
+        ```bash .env
+        API_KEY=sk_live_xxxxxxxxxxxxxxxxxxxx
+        ```
+      </Step>
+      <Step title="Verify the key works">
+        Send a test request to confirm your key is valid:
+
+        ```bash Test Auth
+        curl -H "Authorization: Bearer $API_KEY" \
+          https://api.example.com/v1/ping
+        ```
+
+        You should receive a `200 OK` response with `{ "status": "ok" }`.
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Make your first API call">
+    With authentication configured, you're ready to interact with the API. See the [API Reference](/api-reference/overview) for a full list of available endpoints.
+  </Step>
+</Steps>
+
+```jsx Nested Steps
+<Steps>
+  <Step title="Configure authentication">
+    Set up your authentication provider:
+
+    <Steps>
+      <Step title="Create an API key">
+        Navigate to Dashboard → API Keys and click Generate New Key.
+      </Step>
+      <Step title="Store the key securely">
+        Add the key to your environment variables.
+      </Step>
+      <Step title="Verify the key works">
+        Send a test request to confirm your key is valid.
+      </Step>
+    </Steps>
+  </Step>
+  <Step title="Make your first API call">
+    With authentication configured, you are ready to interact with the API.
+  </Step>
+</Steps>
+```

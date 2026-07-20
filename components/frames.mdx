@@ -1,0 +1,128 @@
+---
+title: "Frame: Style Images and Embeds with Borders"
+sidebarTitle: "Frames"
+description: "Wrap images, screenshots, and iframes in the Mintlify Frame component to add rounded borders, shadows, and optional captions."
+---
+
+Raw images dropped into a documentation page can feel disconnected from the surrounding content — they sit flush against the text with no visual separation. The `<Frame>` component solves this by wrapping any image, screenshot, or iframe in a styled container that adds rounded corners, a subtle shadow, and optionally a caption. A single `<Frame>` tag is all it takes to make a screenshot look polished and intentional.
+
+## Basic Frame
+
+Wrap an `<img>` tag (or a Markdown image) inside `<Frame>` to apply the default border and shadow treatment. The image fills the full width of the content column by default.
+
+```mdx title="Basic Frame wrapping an image"
+<Frame>
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+```
+
+<Frame>
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+
+## Frame with a Caption
+
+Add a `caption` prop to display a short label below the image. Use captions to credit a screenshot source, describe what the reader is looking at, or add context that doesn't belong in the surrounding prose.
+
+```mdx title="Frame with caption prop"
+<Frame caption="The Mintlify logo as it appears on light backgrounds">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+```
+
+<Frame caption="The Mintlify logo as it appears on light backgrounds">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+
+## Frame with Glass Type
+
+Pass `type="glass"` to apply a frosted-glass background behind the image. This works especially well for images with transparent backgrounds or screenshots taken on dark-mode UIs, where the default white container would create a jarring contrast.
+
+```mdx title="Frame with type='glass' for frosted-glass effect"
+<Frame type="glass">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo on glass background" />
+</Frame>
+```
+
+<Frame type="glass">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo on glass background" />
+</Frame>
+
+<Tip>
+  Always wrap UI screenshots in a `<Frame>`. The border and shadow visually separate the screenshot from your prose, making the page easier to scan and giving your documentation a consistently polished look with zero extra effort.
+</Tip>
+
+## Frame Wrapping an Iframe
+
+`<Frame>` is not limited to images — you can wrap any embeddable element, including `<iframe>` tags. This is ideal for embedding video walkthroughs, interactive demos, or code playgrounds directly in a docs page.
+
+```mdx title="Frame wrapping an embedded YouTube video"
+<Frame caption="A quick product walkthrough (2 min)">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="Product walkthrough video"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</Frame>
+```
+
+<Frame caption="A quick product walkthrough (2 min)">
+  <iframe
+    width="560"
+    height="315"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="Product walkthrough video"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  />
+</Frame>
+
+## Image Without Frame vs Image Inside Frame
+
+Seeing both versions side by side makes the difference clear. A bare image blends into the page; a framed image reads as a deliberate visual artefact with clear boundaries.
+
+```mdx title="Bare image — no Frame"
+![Mintlify logo](https://mintlify.com/logo/light.svg)
+```
+
+```mdx title="Same image inside a Frame"
+<Frame caption="Mintlify logo — framed and captioned">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+```
+
+The bare Markdown image above renders inline with no border or breathing room. The `<Frame>` version below renders with a rounded container, shadow, and caption — treating the image as a first-class visual element.
+
+<Frame caption="Mintlify logo — framed and captioned">
+  <img src="https://mintlify.com/logo/light.svg" alt="Mintlify logo" />
+</Frame>
+
+<Note>
+  `<Frame>` does **not** resize its contents. If you need to control the dimensions of an image or iframe, set `width` and `height` directly on the inner `<img>` or `<iframe>` element. The Frame container will adapt to whatever size the inner element occupies.
+</Note>
+
+## Frame Props Reference
+
+| Prop | Type | Default | Description |
+|---|---|---|---|
+| `caption` | `string` | — | Text label displayed below the framed content |
+| `type` | `"rounded"` \| `"glass"` \| `"clip"` | `"rounded"` | Visual style of the container: standard border, frosted-glass background, or clipped to the container bounds |
+
+```mdx title="All Frame props in one example"
+<Frame
+  caption="Dashboard overview — production environment"
+  type="glass"
+>
+  <img
+    src="https://mintlify.com/logo/light.svg"
+    alt="Dashboard screenshot"
+    width="800"
+    height="450"
+  />
+</Frame>
+```

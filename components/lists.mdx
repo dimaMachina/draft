@@ -1,0 +1,197 @@
+---
+title: "Lists and Typography: Text Formatting in Mintlify"
+sidebarTitle: "Lists"
+description: "Format ordered lists, unordered lists, nested lists, and rich text including bold, italic, strikethrough, and inline code in your docs."
+---
+
+Good typography makes documentation easier to scan and comprehend. Mintlify supports the full range of Markdown text formatting: bulleted and numbered lists, nested hierarchies, task checklists, inline emphasis, blockquotes, and horizontal rules. This page shows every formatting option with a live rendered example and the exact source that produces it — so you can copy the pattern you need and move on.
+
+---
+
+## Unordered List
+
+Use a bulleted list when order does not matter and items are roughly equivalent in importance. Start each item with a hyphen (`-`), an asterisk (`*`), or a plus sign (`+`).
+
+- Mintlify supports MDX, so every page can mix Markdown and React components
+- The `docs.json` file controls your navigation, branding, and site settings
+- Pages live in the root of your repository and use the `.mdx` extension
+- You can deploy to the Mintlify platform or self-host using the CLI
+
+**Source:**
+
+```mdx Unordered list
+- Mintlify supports MDX, so every page can mix Markdown and React components
+- The `docs.json` file controls your navigation, branding, and site settings
+- Pages live in the root of your repository and use the `.mdx` extension
+- You can deploy to the Mintlify platform or self-host using the CLI
+```
+
+---
+
+## Ordered List
+
+Use a numbered list when sequence matters — installation steps, ranked options, or any procedure where the reader must follow items in a specific order.
+
+1. Install the Mintlify CLI globally with `npm i -g mintlify`
+2. Navigate to your docs repository in the terminal
+3. Run `mintlify dev` to start the local preview server
+4. Open `http://localhost:3000` in your browser
+5. Edit any `.mdx` file and watch the page update automatically
+
+**Source:**
+
+```mdx Ordered list
+1. Install the Mintlify CLI globally with `npm i -g mintlify`
+2. Navigate to your docs repository in the terminal
+3. Run `mintlify dev` to start the local preview server
+4. Open `http://localhost:3000` in your browser
+5. Edit any `.mdx` file and watch the page update automatically
+```
+
+---
+
+## Nested List
+
+Indent by two spaces (or a tab) to create a sub-list under any list item. You can mix ordered and unordered levels freely.
+
+- **Authentication methods**
+  - API key — passed via the `Authorization` header
+  - OAuth 2.0 — use the authorization code flow for user-facing apps
+    - Scopes must be requested at authorization time
+    - Refresh tokens expire after 30 days of inactivity
+  - Session cookie — available for browser-based integrations only
+- **Rate limits**
+  - Free tier: 100 requests per minute
+  - Pro tier: 1,000 requests per minute
+  - Enterprise: custom limits negotiated with your account team
+
+**Source:**
+
+```mdx Nested list
+- **Authentication methods**
+  - API key — passed via the `Authorization` header
+  - OAuth 2.0 — use the authorization code flow for user-facing apps
+    - Scopes must be requested at authorization time
+    - Refresh tokens expire after 30 days of inactivity
+  - Session cookie — available for browser-based integrations only
+- **Rate limits**
+  - Free tier: 100 requests per minute
+  - Pro tier: 1,000 requests per minute
+  - Enterprise: custom limits negotiated with your account team
+```
+
+---
+
+## Task List (Checklist)
+
+Use `- [ ]` for an unchecked item and `- [x]` for a checked item. Task lists are ideal for onboarding checklists, pre-flight checks, or release checklists.
+
+- [x] Create a new Mintlify project from the dashboard
+- [x] Install the CLI and run `mintlify dev` locally
+- [x] Update `docs.json` with your brand colors and logo
+- [ ] Write your Getting Started guide
+- [ ] Add API reference pages using OpenAPI or `<ParamField>`
+- [ ] Connect your custom domain in the Mintlify dashboard
+- [ ] Invite your team members as editors
+
+**Source:**
+
+```mdx Task list
+- [x] Create a new Mintlify project from the dashboard
+- [x] Install the CLI and run `mintlify dev` locally
+- [x] Update `docs.json` with your brand colors and logo
+- [ ] Write your Getting Started guide
+- [ ] Add API reference pages using OpenAPI or `<ParamField>`
+- [ ] Connect your custom domain in the Mintlify dashboard
+- [ ] Invite your team members as editors
+```
+
+---
+
+## Inline Text Formatting
+
+Markdown gives you a handful of inline styles for emphasizing words or phrases within a sentence. Use them purposefully — not decoratively.
+
+You can write **bold text** for strong emphasis, *italic text* for subtle stress or terminology, ~~strikethrough~~ for removed or deprecated content, and `inline code` for any literal value, command, file name, or code symbol that appears within prose. You can also add [hyperlinks](https://mintlify.com/docs) to external or internal pages using standard Markdown link syntax.
+
+**Source:**
+
+```mdx Inline formatting
+You can write **bold text** for strong emphasis, *italic text* for subtle
+stress or terminology, ~~strikethrough~~ for removed or deprecated content,
+and `inline code` for any literal value, command, file name, or code symbol
+that appears within prose. You can also add
+[hyperlinks](https://mintlify.com/docs) to external or internal pages.
+```
+
+---
+
+## Blockquote
+
+Use the `>` prefix to create a blockquote. Blockquotes suit attributed quotations, extended excerpts from external sources, or any passage you want to visually set apart from the surrounding prose.
+
+> Documentation is a love letter that you write to your future self.
+>
+> — Damian Conway
+
+**Source:**
+
+```mdx Blockquote
+> Documentation is a love letter that you write to your future self.
+>
+> — Damian Conway
+```
+
+---
+
+## Horizontal Rule
+
+A horizontal rule (`---` on its own line) renders as a full-width dividing line. Use it to create a clear visual break between major sections on a page that doesn't warrant a new heading.
+
+---
+
+**Source:**
+
+```mdx Horizontal rule
+---
+```
+
+---
+
+## Heading Hierarchy
+
+Mintlify generates a table of contents from `##` and `###` headings. Use headings to give your page a clear structure — don't skip levels or use headings purely for visual sizing.
+
+## H2 — Major Section Heading
+
+Use H2 for top-level sections within a page. These headings appear in the right-hand table of contents.
+
+### H3 — Subsection Heading
+
+Use H3 for subsections inside an H2 section. They are also included in the table of contents.
+
+#### H4 — Detail-level Heading
+
+Use H4 sparingly, for a labeled group of related content within an H3 subsection. H4 headings do not appear in the table of contents.
+
+**Source:**
+
+```mdx Headings
+## H2 — Major Section Heading
+
+Use H2 for top-level sections within a page.
+
+### H3 — Subsection Heading
+
+Use H3 for subsections inside an H2 section.
+
+#### H4 — Detail-level Heading
+
+Use H4 sparingly, within an H3 subsection.
+```
+
+---
+
+<Tip>
+  Reach for a list only when the items are genuinely discrete and parallel. If your list items are longer than a line or two each, or if they flow naturally from one to the next, prose is almost always clearer. A well-written paragraph with transitional phrases — "first… then… finally…" — communicates sequence just as effectively as a numbered list, and it's easier to read.
+</Tip>

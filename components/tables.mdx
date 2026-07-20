@@ -1,0 +1,171 @@
+---
+title: "Tables: Organize Data in Your Documentation"
+sidebarTitle: "Tables"
+description: "Create Markdown tables and styled data tables in Mintlify docs to present structured information like API parameters and config options."
+---
+
+Tables are the right tool whenever you need to present structured, comparative, or multi-attribute data — think API parameters, configuration options, or feature comparisons. Mintlify renders standard GitHub Flavored Markdown (GFM) table syntax with clean styling. For rich API documentation, you can also reach for `<ParamField>` components, which give you types, defaults, and nested descriptions that plain tables cannot express.
+
+---
+
+## Basic Markdown Table
+
+Markdown tables use pipe characters (`|`) to separate columns and hyphens (`---`) to define the header row. Add colons in the separator row to control alignment: `:---` for left, `:---:` for center, and `---:` for right.
+
+| Planet | Distance from Sun (AU) | Moons |
+| :--- | :---: | ---: |
+| Mercury | 0.39 | 0 |
+| Venus | 0.72 | 0 |
+| Earth | 1.00 | 1 |
+| Mars | 1.52 | 2 |
+| Jupiter | 5.20 | 95 |
+
+**Source:**
+
+```mdx Basic table
+| Planet | Distance from Sun (AU) | Moons |
+| :--- | :---: | ---: |
+| Mercury | 0.39 | 0 |
+| Venus | 0.72 | 0 |
+| Earth | 1.00 | 1 |
+| Mars | 1.52 | 2 |
+| Jupiter | 5.20 | 95 |
+```
+
+---
+
+## Callout Types Reference Table
+
+The table below documents every Mintlify callout component alongside its visual color and recommended use case.
+
+| Component | Color | Use Case |
+| :--- | :--- | :--- |
+| `<Note>` | Blue | Important context or clarifications the reader should keep in mind |
+| `<Tip>` | Green | Best practices, shortcuts, and positive recommendations |
+| `<Warning>` | Yellow | Actions that could cause unintended problems or extra work |
+| `<Danger>` | Red | Irreversible or destructive actions with serious consequences |
+| `<Info>` | Gray | Supplemental background, definitions, or contextual asides |
+| `<Check>` | Green | Confirmation that a step or setup process completed successfully |
+
+**Source:**
+
+```mdx Callout types table
+| Component | Color | Use Case |
+| :--- | :--- | :--- |
+| `<Note>` | Blue | Important context or clarifications |
+| `<Tip>` | Green | Best practices and recommendations |
+| `<Warning>` | Yellow | Actions that could cause problems |
+| `<Danger>` | Red | Irreversible or destructive actions |
+| `<Info>` | Gray | Supplemental background or context |
+| `<Check>` | Green | Confirmation of success |
+```
+
+---
+
+## Code Block Meta Options Table
+
+Use the table below as a quick reference for all code block meta options available in Mintlify.
+
+| Option | Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Label displayed in the code block header | `bash Terminal` |
+| `lines` | `flag` | Renders line numbers in the left gutter | `python lines` |
+| `highlight` | `range` | Emphasizes specific lines with a background tint | `highlight={1,4-6}` |
+| `focus` | `range` | Dims all lines outside the specified range | `focus={3-8}` |
+| `expandable` | `flag` | Collapses the block behind a "Show more" toggle | `json expandable` |
+| `wrap` | `flag` | Wraps long lines instead of enabling horizontal scroll | `bash wrap` |
+| `twoslash` | `flag` | Enables TypeScript TwoSlash type-hover annotations | `typescript twoslash` |
+
+**Source:**
+
+```mdx Meta options table
+| Option | Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `title` | `string` | Label in the code block header | `bash Terminal` |
+| `lines` | `flag` | Line numbers in the gutter | `python lines` |
+| `highlight` | `range` | Highlighted lines | `highlight={1,4-6}` |
+| `focus` | `range` | Dimmed non-focused lines | `focus={3-8}` |
+| `expandable` | `flag` | Collapsible long blocks | `json expandable` |
+| `wrap` | `flag` | Wrap long lines | `bash wrap` |
+| `twoslash` | `flag` | TS type annotations | `typescript twoslash` |
+```
+
+---
+
+<Note>
+  Markdown tables do not support multi-line cell content, merged cells, or rich formatting like nested lists. If your data requires any of these, consider breaking it into separate sections with prose, using `<AccordionGroup>` for expandable rows, or switching to `<ParamField>` components for API parameter documentation.
+</Note>
+
+---
+
+## ParamField: A Richer Alternative for API Parameters
+
+When you are documenting API request parameters, `<ParamField>` components give you structured fields — including name, type, requirement status, default value, and a full description — that a Markdown table cannot express cleanly. Each `<ParamField>` renders as a dedicated, styled entry with all metadata inline.
+
+### Path Parameters
+
+<ParamField path="userId" type="string" required>
+  The unique identifier for the user. This is returned in the `id` field of
+  every user object from the API. Format: UUID v4.
+</ParamField>
+
+**Source:**
+
+```mdx Path ParamField
+<ParamField path="userId" type="string" required>
+  The unique identifier for the user. This is returned in the `id` field of
+  every user object from the API. Format: UUID v4.
+</ParamField>
+```
+
+### Query Parameters
+
+<ParamField query="limit" type="integer" default="20">
+  The maximum number of records to return per page. Must be between `1` and
+  `100`. Defaults to `20` if omitted.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  An opaque pagination cursor returned by a previous request. Pass this value
+  to retrieve the next page of results.
+</ParamField>
+
+**Source:**
+
+```mdx Query ParamField
+<ParamField query="limit" type="integer" default="20">
+  The maximum number of records to return per page. Must be between `1` and
+  `100`. Defaults to `20` if omitted.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  An opaque pagination cursor returned by a previous request. Pass this value
+  to retrieve the next page of results.
+</ParamField>
+```
+
+### Body Parameters
+
+<ParamField body="name" type="string" required>
+  The full display name for the new resource. Must be between 2 and 128
+  characters. Whitespace is trimmed automatically.
+</ParamField>
+
+<ParamField body="metadata" type="object">
+  An optional key-value map of up to 16 custom string attributes. Keys must be
+  lowercase alphanumeric with underscores. Values cannot exceed 512 characters.
+</ParamField>
+
+**Source:**
+
+```mdx Body ParamField
+<ParamField body="name" type="string" required>
+  The full display name for the new resource. Must be between 2 and 128
+  characters. Whitespace is trimmed automatically.
+</ParamField>
+
+<ParamField body="metadata" type="object">
+  An optional key-value map of up to 16 custom string attributes. Keys must be
+  lowercase alphanumeric with underscores. Values cannot exceed 512 characters.
+</ParamField>
+```

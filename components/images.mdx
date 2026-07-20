@@ -1,0 +1,104 @@
+---
+title: "Images: Add Visual Content to Your Documentation"
+sidebarTitle: "Images"
+description: "Embed images in Mintlify docs using Markdown syntax or the Frame component for bordered, styled screenshots and diagrams."
+---
+
+Images make your documentation clearer and more engaging. Mintlify supports standard Markdown image syntax for quick inline images, and the `<Frame>` component when you need captions, borders, or polished screenshot presentation. Use the examples below to pick the right approach for your content.
+
+## Basic Markdown Image Syntax
+
+The simplest way to embed an image is standard Markdown. Write an exclamation mark, followed by alt text in square brackets, then the image URL in parentheses.
+
+![Mintlify logo](https://mintlify.com/logo/light.svg)
+
+```mdx title="Basic image syntax"
+![Mintlify logo](https://mintlify.com/logo/light.svg)
+```
+
+Always write descriptive alt text — it improves accessibility and helps search engines understand your content.
+
+## Image with a Caption
+
+Wrap an image in the `<Frame>` component and pass a `caption` prop to display a caption beneath the image. Captions give readers context without cluttering the surrounding prose.
+
+<Frame caption="The Mintlify logo — used across documentation and marketing surfaces.">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+
+```mdx title="Image with caption"
+<Frame caption="The Mintlify logo — used across documentation and marketing surfaces.">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+```
+
+## The Frame Component for Screenshots
+
+Use `<Frame>` to add a rounded border and subtle shadow to any screenshot or diagram. This is especially useful for UI screenshots that would otherwise blend into the page background.
+
+<Frame type="rounded">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+
+```mdx title="Frame with rounded type"
+<Frame type="rounded">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+```
+
+Set `type="clip"` to clip the image to the frame's border radius without adding a shadow — useful for logos or icons that already have their own visual weight.
+
+<Frame type="clip">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+
+```mdx title="Frame with clip type"
+<Frame type="clip">
+  ![Mintlify logo](https://mintlify.com/logo/light.svg)
+</Frame>
+```
+
+<Tip>
+  Use `<Frame>` for every UI screenshot in your docs. The border separates the screenshot from the page background and makes the interface easier to read, especially on white-background screens.
+</Tip>
+
+## Side-by-Side Images
+
+Display two images next to each other using `<CardGroup cols={2}>` with a `<Card>` per image. Set the `img` prop on each `<Card>` to use the image as the card's visual header.
+
+<CardGroup cols={2}>
+  <Card title="Light Theme" img="https://mintlify.com/logo/light.svg">
+    The Mintlify logo rendered on a light background.
+  </Card>
+  <Card title="Dark Theme" img="https://mintlify.com/logo/dark.svg">
+    The Mintlify logo rendered on a dark background.
+  </Card>
+</CardGroup>
+
+```mdx title="Side-by-side images with CardGroup"
+<CardGroup cols={2}>
+  <Card title="Light Theme" img="https://mintlify.com/logo/light.svg">
+    The Mintlify logo rendered on a light background.
+  </Card>
+  <Card title="Dark Theme" img="https://mintlify.com/logo/dark.svg">
+    The Mintlify logo rendered on a dark background.
+  </Card>
+</CardGroup>
+```
+
+You can add up to four columns by changing `cols={2}` to `cols={3}` or `cols={4}`.
+
+## Frame Props Reference
+
+The table below covers every prop the `<Frame>` component accepts.
+
+| Prop      | Type                     | Default     | Description                                                                 |
+|-----------|--------------------------|-------------|-----------------------------------------------------------------------------|
+| `caption` | `string`                 | —           | Text displayed beneath the image as a caption.                              |
+| `type`    | `"rounded"` \| `"clip"` | `"rounded"` | `"rounded"` adds a border and shadow. `"clip"` clips to the border radius only. |
+
+## Image Hosting and Optimization
+
+<Note>
+  Keep images under **2 MB** and host them on a CDN (such as Cloudinary, Imgix, or your cloud provider's object storage) rather than committing large files directly to your repository. CDN-hosted images load faster for readers worldwide and keep your repository size manageable. Reference images by their CDN URL in your MDX files.
+</Note>

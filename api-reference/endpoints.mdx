@@ -1,0 +1,538 @@
+---
+title: "API Endpoints: Pages, Deployments, and Analytics"
+sidebarTitle: "Endpoints"
+description: "Full reference for Mintlify API endpoints: list pages, get page content, trigger deployments, and retrieve site analytics."
+---
+
+The Docs API exposes endpoints for three resource categories: **Pages** (read and write your documentation content), **Deployments** (trigger a site build and publish), and **Analytics** (retrieve traffic and engagement data). All endpoints are versioned under `/v1` and require a valid Bearer token in the `Authorization` header — see the [Authentication](/api-reference/authentication) page for details.
+
+<Tabs>
+  <Tab title="Pages">
+    - [`GET /pages`](#get-pages) — List all pages in a project
+    - [`GET /pages/:id`](#get-pages-id) — Get a single page by ID
+    - [`POST /pages`](#post-pages) — Create a new page
+  </Tab>
+  <Tab title="Deployments">
+    - [`POST /deployments`](#post-deployments) — Trigger a new deployment
+  </Tab>
+  <Tab title="Analytics">
+    - [`GET /analytics`](#get-analytics) — Retrieve site analytics
+  </Tab>
+</Tabs>
+
+---
+
+## Pages
+
+### GET /pages
+
+List all documentation pages that belong to a project. Results are paginated using a cursor and returned in reverse-chronological order by `updatedAt`.
+
+<ParamField query="project_id" type="string" required>
+  The unique identifier of the project whose pages you want to list. You can find your project ID in **Settings → General** in the Mintlify dashboard.
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  The maximum number of pages to return per page of results. Defaults to `20`. Maximum value is `100`.
+</ParamField>
+
+<ParamField query="cursor" type="string">
+  An opaque pagination cursor returned in the previous response as `meta.nextCursor`. Omit this parameter to start from the first page of results.
+</ParamField>
+
+<CodeGroup>
+
+```bash curl
+curl --request GET \
+  --url "https://api.mintlify.com/v1/pages?project_id=proj_01hx&limit=20" \
+  --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript (fetch)
+const params = new URLSearchParams({
+  project_id: "proj_01hx",
+  limit: "20",
+});
+
+const response = await fetch(
+  `https://api.mintlify.com/v1/pages?${params}`,
+  {
+    headers: {
+      Authorization: "Bearer YOUR_API_KEY",
+    },
+  }
+);
+
+const { data, meta } = await response.json();
+```
+
+</CodeGroup>
+
+```json Response
+{
+  "data": {
+    "pages": [
+      {
+        "id": "page_9kLm3pQr",
+        "slug": "guides/quickstart",
+        "title": "Quickstart Guide",
+        "description": "Get up and running with the Docs API in under five minutes.",
+        "updatedAt": "2024-01-15T10:30:00Z"
+      },
+      {
+        "id": "page_4nXv8wYz",
+        "slug": "api-reference/overview",
+        "title": "API Reference Overview",
+        "description": "An introduction to the Docs API base URL and conventions.",
+        "updatedAt": "2024-01-14T09:15:00Z"
+      }
+    ]
+  },
+  "meta": {
+    "requestId": "req_abc123",
+    "timestamp": "2024-01-15T10:30:00Z",
+    "nextCursor": "cur_Tz9bVnKq",
+    "total": 42
+  }
+}
+```
+
+<ResponseField name="pages" type="Page[]">
+  An array of page summary objects. Use the `id` from each object to fetch full page content via [`GET /pages/:id`](#get-pages-id).
+
+  <Expandable title="Page fields">
+    <ResponseField name="id" type="string">
+      The unique identifier for this page (e.g. `page_9kLm3pQr`).
+    </ResponseField>
+    <ResponseField name="slug" type="string">
+      The URL-path slug for this page relative to the project root (e.g. `guides/quickstart`).
+    </ResponseField>
+    <ResponseField name="title" type="string">
+      The page title as defined in the MDX frontmatter.
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      The meta description as defined in the MDX frontmatter.
+    </ResponseField>
+    <ResponseField name="updatedAt" type="string">
+      ISO 8601 timestamp of the last time this page was modified.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+### GET /pages/:id
+
+Retrieve the full content and metadata for a single documentation page using its unique ID.
+
+<ParamField path="id" type="string" required>
+  The unique identifier of the page to retrieve (e.g. `page_9kLm3pQr`). You can obtain page IDs from the [`GET /pages`](#get-pages) list endpoint.
+</ParamField>
+
+<CodeGroup>
+
+```bash curl
+curl --request GET \
+  --url "https://api.mintlify.com/v1/pages/page_9kLm3pQr" \
+  --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript (fetch)
+const pageId = "page_9kLm3pQr";
+
+const response = await fetch(
+  `https://api.mintlify.com/v1/pages/${pageId}`,
+  {
+    headers: {
+      Authorization: "Bearer YOUR_API_KEY",
+    },
+  }
+);
+
+const { data } = await response.json();
+```
+
+</CodeGroup>
+
+```json Response
+{
+  "data": {
+    "page": {
+      "id": "page_9kLm3pQr",
+      "slug": "guides/quickstart",
+      "title": "Quickstart Guide",
+      "description": "Get up and running with the Docs API in under five minutes.",
+      "content": "---\ntitle: \"Quickstart Guide\"\n---\n\nWelcome! Follow these steps...",
+      "updatedAt": "2024-01-15T10:30:00Z",
+      "createdAt": "2024-01-01T08:00:00Z"
+    }
+  },
+  "meta": {
+    "requestId": "req_def456",
+    "timestamp": "2024-01-15T10:31:00Z"
+  }
+}
+```
+
+<ResponseField name="page" type="object">
+  The full page object including raw MDX content.
+
+  <Expandable title="Page fields">
+    <ResponseField name="id" type="string">
+      The unique identifier for this page.
+    </ResponseField>
+    <ResponseField name="slug" type="string">
+      The URL-path slug for this page relative to the project root.
+    </ResponseField>
+    <ResponseField name="title" type="string">
+      The page title from MDX frontmatter.
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      The meta description from MDX frontmatter.
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      The full raw MDX source of the page, including frontmatter.
+    </ResponseField>
+    <ResponseField name="createdAt" type="string">
+      ISO 8601 timestamp of when this page was first created.
+    </ResponseField>
+    <ResponseField name="updatedAt" type="string">
+      ISO 8601 timestamp of the last modification.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+### POST /pages
+
+Create a new documentation page in the specified project. The page is created as a draft and will not appear on your live site until you trigger a deployment.
+
+<ParamField body="project_id" type="string" required>
+  The unique identifier of the project in which to create the page.
+</ParamField>
+
+<ParamField body="slug" type="string" required>
+  The URL-path slug for the new page (e.g. `guides/my-new-page`). Must be unique within the project. Use forward slashes to place the page in a subdirectory.
+</ParamField>
+
+<ParamField body="title" type="string" required>
+  The page title to include in the MDX frontmatter. This value appears in the browser tab and in search results.
+</ParamField>
+
+<ParamField body="content" type="string" required>
+  The full MDX source for the page, including frontmatter. The API writes this value verbatim to the page file.
+</ParamField>
+
+<ParamField body="description" type="string">
+  The meta description for the page. If omitted, the page is created without a `description` field in its frontmatter.
+</ParamField>
+
+<CodeGroup>
+
+```bash curl
+curl --request POST \
+  --url "https://api.mintlify.com/v1/pages" \
+  --header "Authorization: Bearer YOUR_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "project_id": "proj_01hx",
+    "slug": "guides/api-basics",
+    "title": "API Basics",
+    "description": "Learn the core concepts behind the Docs API.",
+    "content": "---\ntitle: \"API Basics\"\ndescription: \"Learn the core concepts behind the Docs API.\"\n---\n\nThe Docs API uses standard REST conventions..."
+  }'
+```
+
+```javascript JavaScript (fetch)
+const response = await fetch("https://api.mintlify.com/v1/pages", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    project_id: "proj_01hx",
+    slug: "guides/api-basics",
+    title: "API Basics",
+    description: "Learn the core concepts behind the Docs API.",
+    content:
+      '---\ntitle: "API Basics"\ndescription: "Learn the core concepts."\n---\n\nThe Docs API uses standard REST conventions...',
+  }),
+});
+
+const { data } = await response.json();
+```
+
+</CodeGroup>
+
+```json Response
+{
+  "data": {
+    "page": {
+      "id": "page_2cFg7hJk",
+      "slug": "guides/api-basics",
+      "title": "API Basics",
+      "description": "Learn the core concepts behind the Docs API.",
+      "content": "---\ntitle: \"API Basics\"\n---\n\nThe Docs API uses standard REST conventions...",
+      "createdAt": "2024-01-15T11:00:00Z",
+      "updatedAt": "2024-01-15T11:00:00Z"
+    }
+  },
+  "meta": {
+    "requestId": "req_ghi789",
+    "timestamp": "2024-01-15T11:00:00Z"
+  }
+}
+```
+
+<ResponseField name="page" type="object">
+  The newly created page object. The shape is identical to the object returned by [`GET /pages/:id`](#get-pages-id).
+
+  <Expandable title="Page fields">
+    <ResponseField name="id" type="string">
+      The unique identifier assigned to the new page.
+    </ResponseField>
+    <ResponseField name="slug" type="string">
+      The slug you provided in the request body.
+    </ResponseField>
+    <ResponseField name="title" type="string">
+      The title you provided in the request body.
+    </ResponseField>
+    <ResponseField name="description" type="string">
+      The description you provided, or `null` if omitted.
+    </ResponseField>
+    <ResponseField name="content" type="string">
+      The full MDX source as written to the file.
+    </ResponseField>
+    <ResponseField name="createdAt" type="string">
+      ISO 8601 timestamp of creation.
+    </ResponseField>
+    <ResponseField name="updatedAt" type="string">
+      ISO 8601 timestamp of the last modification — equal to `createdAt` for a newly created page.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+---
+
+## Deployments
+
+### POST /deployments
+
+Trigger a new build and deployment for your documentation site. The deployment process compiles your MDX pages, applies your `docs.json` configuration, and publishes the result to your live site URL.
+
+<ParamField body="project_id" type="string" required>
+  The unique identifier of the project to deploy.
+</ParamField>
+
+<ParamField body="branch" type="string">
+  The Git branch to deploy from. Defaults to `"main"` if omitted. Use this parameter to preview changes on a feature branch before merging.
+</ParamField>
+
+<CodeGroup>
+
+```bash curl
+curl --request POST \
+  --url "https://api.mintlify.com/v1/deployments" \
+  --header "Authorization: Bearer YOUR_API_KEY" \
+  --header "Content-Type: application/json" \
+  --data '{
+    "project_id": "proj_01hx",
+    "branch": "main"
+  }'
+```
+
+```javascript JavaScript (fetch)
+const response = await fetch("https://api.mintlify.com/v1/deployments", {
+  method: "POST",
+  headers: {
+    Authorization: "Bearer YOUR_API_KEY",
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    project_id: "proj_01hx",
+    branch: "main",
+  }),
+});
+
+const { data } = await response.json();
+```
+
+</CodeGroup>
+
+```json Response
+{
+  "data": {
+    "deployment": {
+      "id": "dpl_5mNp9qRs",
+      "projectId": "proj_01hx",
+      "branch": "main",
+      "status": "queued",
+      "createdAt": "2024-01-15T12:00:00Z",
+      "completedAt": null,
+      "liveUrl": "https://docs.yourcompany.com"
+    }
+  },
+  "meta": {
+    "requestId": "req_jkl012",
+    "timestamp": "2024-01-15T12:00:00Z"
+  }
+}
+```
+
+<ResponseField name="deployment" type="object">
+  The deployment object representing the newly queued build.
+
+  <Expandable title="Deployment fields">
+    <ResponseField name="id" type="string">
+      The unique identifier for this deployment (e.g. `dpl_5mNp9qRs`).
+    </ResponseField>
+    <ResponseField name="projectId" type="string">
+      The project this deployment belongs to.
+    </ResponseField>
+    <ResponseField name="branch" type="string">
+      The Git branch being deployed.
+    </ResponseField>
+    <ResponseField name="status" type="string">
+      The current status of the deployment. One of `queued`, `building`, `succeeded`, or `failed`.
+    </ResponseField>
+    <ResponseField name="createdAt" type="string">
+      ISO 8601 timestamp of when the deployment was queued.
+    </ResponseField>
+    <ResponseField name="completedAt" type="string">
+      ISO 8601 timestamp of when the deployment finished, or `null` if it is still in progress.
+    </ResponseField>
+    <ResponseField name="liveUrl" type="string">
+      The public URL where the site is published after a successful deployment.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Note>
+  Deployments are asynchronous. The initial response returns a status of `queued`. Poll the deployment status using the `id` field, or listen for a webhook event from the Mintlify dashboard to know when the build completes.
+</Note>
+
+---
+
+## Analytics
+
+### GET /analytics
+
+Retrieve aggregated traffic and engagement analytics for your documentation site over a specified date range. Metrics are aggregated daily and updated every 24 hours.
+
+<ParamField query="project_id" type="string" required>
+  The unique identifier of the project for which to retrieve analytics.
+</ParamField>
+
+<ParamField query="from" type="string">
+  The start of the date range in ISO 8601 format (e.g. `2024-01-01`). Defaults to 30 days before the current date if omitted.
+</ParamField>
+
+<ParamField query="to" type="string">
+  The end of the date range in ISO 8601 format (e.g. `2024-01-31`). Defaults to the current date if omitted. The maximum allowed range is 90 days.
+</ParamField>
+
+<CodeGroup>
+
+```bash curl
+curl --request GET \
+  --url "https://api.mintlify.com/v1/analytics?project_id=proj_01hx&from=2024-01-01&to=2024-01-31" \
+  --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+```javascript JavaScript (fetch)
+const params = new URLSearchParams({
+  project_id: "proj_01hx",
+  from: "2024-01-01",
+  to: "2024-01-31",
+});
+
+const response = await fetch(
+  `https://api.mintlify.com/v1/analytics?${params}`,
+  {
+    headers: {
+      Authorization: "Bearer YOUR_API_KEY",
+    },
+  }
+);
+
+const { data } = await response.json();
+```
+
+</CodeGroup>
+
+```json Response
+{
+  "data": {
+    "analytics": {
+      "pageViews": 84320,
+      "uniqueVisitors": 21540,
+      "averageTimeOnPageSeconds": 94,
+      "topPages": [
+        {
+          "slug": "guides/quickstart",
+          "title": "Quickstart Guide",
+          "views": 12400
+        },
+        {
+          "slug": "api-reference/overview",
+          "title": "API Reference Overview",
+          "views": 9870
+        },
+        {
+          "slug": "api-reference/authentication",
+          "title": "Authenticate API Requests",
+          "views": 7650
+        }
+      ],
+      "period": {
+        "from": "2024-01-01",
+        "to": "2024-01-31"
+      }
+    }
+  },
+  "meta": {
+    "requestId": "req_mno345",
+    "timestamp": "2024-01-31T23:59:59Z"
+  }
+}
+```
+
+<ResponseField name="analytics" type="object">
+  An aggregated analytics summary for the requested project and date range.
+
+  <Expandable title="Analytics fields">
+    <ResponseField name="pageViews" type="integer">
+      Total number of page views recorded across all pages during the period.
+    </ResponseField>
+    <ResponseField name="uniqueVisitors" type="integer">
+      Total number of unique visitors based on anonymized session identifiers.
+    </ResponseField>
+    <ResponseField name="averageTimeOnPageSeconds" type="integer">
+      Average time (in seconds) visitors spent on a page before navigating away.
+    </ResponseField>
+    <ResponseField name="topPages" type="TopPage[]">
+      An ordered list of the ten most-viewed pages during the period.
+
+      <Expandable title="TopPage fields">
+        <ResponseField name="slug" type="string">
+          The slug of the page.
+        </ResponseField>
+        <ResponseField name="title" type="string">
+          The title of the page.
+        </ResponseField>
+        <ResponseField name="views" type="integer">
+          The total number of views this page received during the period.
+        </ResponseField>
+      </Expandable>
+    </ResponseField>
+    <ResponseField name="period" type="object">
+      The `from` and `to` dates used to compute the analytics, echoed back for confirmation.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Warning>
+  Analytics data is available with a delay of up to 24 hours. Requesting data for the current day returns partial results that will be updated in the next processing cycle.
+</Warning>

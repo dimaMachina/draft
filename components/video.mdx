@@ -1,0 +1,103 @@
+---
+title: "Video Embeds: Add Interactive Video to Your Docs"
+sidebarTitle: "Video"
+description: "Embed YouTube, Loom, and other video providers in your Mintlify documentation using the Frame component or iframe embeds."
+---
+
+Video is one of the most effective ways to walk users through complex workflows, product demos, or onboarding flows. Mintlify lets you embed videos from YouTube, Loom, and any other provider that offers an `<iframe>` embed code, and it also supports self-hosted videos through the native HTML `<video>` element.
+
+## Embedding a YouTube Video
+
+Wrap a standard YouTube `<iframe>` inside a `<Frame>` component to give the embed a polished, responsive container with a rounded border. Grab the embed URL from YouTube's **Share → Embed** dialog and replace the `src`.
+
+<Frame>
+  <iframe
+    width="100%"
+    height="400"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</Frame>
+
+```mdx title="YouTube embed inside Frame"
+<Frame>
+  <iframe
+    width="100%"
+    height="400"
+    src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+    title="YouTube video player"
+    frameBorder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowFullScreen
+  ></iframe>
+</Frame>
+```
+
+Set `width="100%"` so the embed scales with the content column on all screen sizes. The `height` value of `400` works well for widescreen content — adjust it to suit your video's aspect ratio.
+
+## Embedding a Loom Video
+
+Loom generates an `<iframe>` embed snippet from the **Share** menu on any recording. Paste the snippet inside a `<Frame>` just as you would a YouTube embed.
+
+```mdx title="Loom embed inside Frame"
+<Frame>
+  <iframe
+    width="100%"
+    height="400"
+    src="https://www.loom.com/embed/placeholder"
+    title="Loom video walkthrough"
+    frameBorder="0"
+    allowFullScreen
+  ></iframe>
+</Frame>
+```
+
+Replace `https://www.loom.com/embed/placeholder` with the actual embed URL from your Loom recording. Loom embed URLs follow the pattern `https://www.loom.com/embed/<video-id>`.
+
+## Self-Hosted Videos
+
+For videos you host yourself — on S3, Google Cloud Storage, or your own server — use the native HTML `<video>` element. Providing both `mp4` and `webm` sources gives you the broadest browser support.
+
+```mdx title="Self-hosted video with <video> element"
+<video
+  width="100%"
+  controls
+  preload="metadata"
+>
+  <source src="https://cdn.example.com/demo.mp4" type="video/mp4" />
+  <source src="https://cdn.example.com/demo.webm" type="video/webm" />
+  Your browser does not support the video element.
+</video>
+```
+
+Use `preload="metadata"` rather than `preload="auto"` to avoid loading the full video until the user clicks play. The fallback text between the tags displays only in browsers that do not support `<video>`.
+
+<Warning>
+  Never set `autoplay` combined with a non-muted audio track. Unexpected audio startles users and violates browser autoplay policies — most modern browsers will block the video entirely. If you need autoplay for a background or decorative clip, always add the `muted` attribute alongside `autoplay`.
+</Warning>
+
+## Accessibility: Transcripts and Written Alternatives
+
+<Tip>
+  Add a written transcript or a step-by-step summary directly below every embedded video. Users who prefer reading, work in environments where they cannot play audio, or rely on assistive technology will still get full access to your content. A collapsed `<Accordion>` labelled "View transcript" is a clean way to keep the transcript available without cluttering the page.
+</Tip>
+
+## Best Practices
+
+<AccordionGroup>
+  <Accordion title="Keep videos focused and short" icon="clock">
+    Aim for videos under five minutes. Viewers drop off sharply after the two-minute mark for instructional content. Split long walkthroughs into a series of shorter clips, each covering one task, so users can jump directly to what they need.
+  </Accordion>
+  <Accordion title="Choose the right hosting option" icon="server">
+    Use **YouTube** for public-facing content — it handles adaptive streaming and global CDN delivery for free. Use **Loom** for quick internal walkthroughs and async team communication. For private or gated content, host on **Wistia** or **Vimeo** with password protection, or serve files directly from your cloud storage behind a signed URL.
+  </Accordion>
+  <Accordion title="Add captions to every video" icon="closed-captioning">
+    Captions benefit users who are deaf or hard of hearing, non-native speakers, and anyone watching without audio. YouTube auto-generates captions that you can edit for accuracy. Loom and Wistia also offer automatic captioning. Export the caption file and review it before publishing — automated captions frequently mishandle technical terms and product names.
+  </Accordion>
+  <Accordion title="Optimise for performance" icon="gauge-high">
+    Large video files slow down page loads even when embedded from a third-party host, because the embed iframe still makes network requests on load. Lazy-load iframes by adding `loading="lazy"` to your `<iframe>` element. For self-hosted videos, compress with **HandBrake** or **FFmpeg** targeting H.264 at CRF 23 for a good quality-to-size balance, and serve from a CDN edge node close to your users.
+  </Accordion>
+</AccordionGroup>

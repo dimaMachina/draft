@@ -1,0 +1,113 @@
+---
+title: "Docs API Reference: Manage Your Documentation"
+sidebarTitle: "Overview"
+description: "The Docs API lets you create, update, and retrieve documentation pages and metadata programmatically using RESTful HTTP endpoints."
+---
+
+The Docs API is a RESTful interface that lets you manage every aspect of your Mintlify documentation site programmatically. All endpoints return JSON, accept JSON request bodies, and sit behind a single versioned base URL — making it straightforward to integrate into CI pipelines, content tooling, or custom dashboards.
+
+## Base URL
+
+Every request targets the following base URL:
+
+```bash Base URL
+https://api.mintlify.com/v1
+```
+
+<CardGroup cols={2}>
+  <Card title="Authentication" icon="key" href="/api-reference/authentication">
+    Learn how to generate an API key and pass it as a Bearer token on every request.
+  </Card>
+  <Card title="Endpoints" icon="brackets-curly" href="/api-reference/endpoints">
+    Explore the full endpoint reference for pages, deployments, and analytics.
+  </Card>
+</CardGroup>
+
+## Request format
+
+Every request to the Docs API must follow these conventions:
+
+- Set the `Content-Type` header to `application/json` on all `POST` and `PATCH` requests.
+- Send all request bodies as a JSON object.
+- Express all date/time values in [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) format (e.g. `2024-01-15T10:30:00Z`).
+- All responses are returned as JSON regardless of the request method.
+
+## Response format
+
+### Success responses
+
+Every successful response wraps the returned resource(s) in a `data` field alongside a `meta` object that contains a unique request identifier and a server-side timestamp.
+
+```json Success response
+{
+  "data": { "...": "resource fields here" },
+  "meta": {
+    "requestId": "req_abc123",
+    "timestamp": "2024-01-15T10:30:00Z"
+  }
+}
+```
+
+### Error responses
+
+When a request fails, the API returns an `error` object instead of `data`. The `code` field is a machine-readable string you can use for programmatic error handling, and `message` provides a human-readable explanation.
+
+```json Error response
+{
+  "error": {
+    "code": "not_found",
+    "message": "The requested page was not found.",
+    "requestId": "req_abc123"
+  }
+}
+```
+
+## Rate limiting
+
+The Docs API allows up to **1,000 requests per minute** per API key. When you exceed this limit the API returns an `HTTP 429 Too Many Requests` response. Every response includes the following rate-limit headers so you can monitor your usage and back off proactively:
+
+| Header | Description |
+|---|---|
+| `X-RateLimit-Limit` | The maximum number of requests allowed per minute. |
+| `X-RateLimit-Remaining` | The number of requests remaining in the current window. |
+| `X-RateLimit-Reset` | Unix timestamp (seconds) at which the window resets. |
+| `Retry-After` | Seconds to wait before retrying — only present on `429` responses. |
+
+<Note>
+  Rate limit windows are rolling — they are calculated from the time of your first request, not a fixed clock boundary.
+</Note>
+
+## HTTP status codes
+
+The API uses standard HTTP status codes to signal the result of every request.
+
+| Code | Meaning |
+|---|---|
+| `200 OK` | The request succeeded. |
+| `201 Created` | A new resource was created successfully. |
+| `400 Bad Request` | The request body or query parameters are invalid. |
+| `401 Unauthorized` | The API key is missing or invalid. |
+| `403 Forbidden` | The API key is valid but lacks permission to perform this action. |
+| `404 Not Found` | The requested resource does not exist. |
+| `429 Too Many Requests` | You have exceeded the rate limit. |
+| `500 Internal Server Error` | An unexpected error occurred on the server. |
+
+## SDKs
+
+Install an official SDK to interact with the Docs API without writing raw HTTP calls. All SDKs are kept in sync with the latest API version.
+
+<CodeGroup>
+
+```bash Node.js
+npm install @mintlify/docs-sdk
+```
+
+```bash Python
+pip install mintlify-docs
+```
+
+```bash Go
+go get github.com/mintlify/docs-sdk-go
+```
+
+</CodeGroup>

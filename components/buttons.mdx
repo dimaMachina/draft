@@ -1,0 +1,115 @@
+---
+title: "Buttons and Links: Call-to-Action Elements"
+sidebarTitle: "Buttons"
+description: "Add styled button links to your Mintlify documentation using Card components and Markdown links to drive reader action and navigation."
+---
+
+Mintlify does not ship a dedicated `<Button>` component — instead, you drive reader action through two complementary patterns: the `<Card>` component (with an `href` prop) for prominent, visually distinct calls-to-action, and standard Markdown link syntax for inline secondary references. Understanding when to reach for each pattern keeps your pages focused and your readers moving in the right direction.
+
+## Card-Based Calls to Action
+
+The most visually impactful way to surface a CTA is a `<Card>` with an `href`. Wrapping multiple cards in a `<CardGroup>` creates a clean grid of action items that naturally draws the eye. Use this pattern for primary navigation at the bottom of an overview page or at the top of a landing section.
+
+```mdx title="CTA CardGroup — 2-column grid"
+<CardGroup cols={2}>
+  <Card title="Get Started" icon="rocket" href="/quickstart">
+    Set up your project in under five minutes and ship your first docs page.
+  </Card>
+  <Card title="View API Reference" icon="code" href="/api-reference/overview">
+    Explore every endpoint, parameter, and response schema in detail.
+  </Card>
+  <Card title="Browse Components" icon="puzzle-piece" href="/components/callouts">
+    See live examples of every Mintlify component in one place.
+  </Card>
+  <Card title="Read the Guide" icon="book-open" href="/introduction">
+    Understand how Mintlify projects are structured before you dive in.
+  </Card>
+</CardGroup>
+```
+
+Here is the live example:
+
+<CardGroup cols={2}>
+  <Card title="Get Started" icon="rocket" href="/quickstart">
+    Set up your project in under five minutes and ship your first docs page.
+  </Card>
+  <Card title="View API Reference" icon="code" href="/api-reference/overview">
+    Explore every endpoint, parameter, and response schema in detail.
+  </Card>
+  <Card title="Browse Components" icon="puzzle-piece" href="/components/callouts">
+    See live examples of every Mintlify component in one place.
+  </Card>
+  <Card title="Read the Guide" icon="book-open" href="/introduction">
+    Understand how Mintlify projects are structured before you dive in.
+  </Card>
+</CardGroup>
+
+<Tip>
+  Use `<Card href="...">` for **primary CTAs** — the ones you most want a reader to click. Reserve inline Markdown links for secondary references that support the text without interrupting reading flow.
+</Tip>
+
+## Inline Markdown Links
+
+For links woven into prose, use standard Markdown syntax. These are ideal for cross-referencing concepts mid-sentence without pulling the reader's attention away from the content.
+
+```mdx title="Inline Markdown link syntax"
+Learn how to configure your project by reading the [configuration guide](/introduction),
+or jump straight to the [component library](/components/callouts) for live examples.
+```
+
+**Live example:**
+
+Learn how to configure your project by reading the [configuration guide](/introduction), or jump straight to the [component library](/components/callouts) for live examples.
+
+## A Single Card as a Prominent Button
+
+When you need one standout CTA — such as at the end of a tutorial — a single `<Card>` with an icon works as a large, unmissable button. Keep the title short and action-oriented.
+
+```mdx title="Single Card CTA with icon"
+<Card title="Start the Quickstart →" icon="arrow-right" href="/quickstart">
+  You have everything you need. Follow the quickstart to deploy your first
+  Mintlify site in minutes.
+</Card>
+```
+
+<Card title="Start the Quickstart →" icon="arrow-right" href="/quickstart">
+  You have everything you need. Follow the quickstart to deploy your first Mintlify site in minutes.
+</Card>
+
+## External vs Internal Links
+
+Both inline links and Card `href` values support external URLs. Mintlify automatically opens external links in a new tab, so your readers never lose their place in your docs.
+
+```mdx title="Internal and external link examples"
+{/* Internal link — stays in the same tab */}
+[View the introduction](/introduction)
+
+{/* External link — opens in a new tab automatically */}
+[Mintlify on GitHub](https://github.com/mintlify/mint)
+```
+
+```mdx title="External Card link"
+<Card title="Mintlify on GitHub" icon="github" href="https://github.com/mintlify/mint">
+  Star the repo, file issues, and follow along with releases.
+</Card>
+```
+
+<Card title="Mintlify on GitHub" icon="github" href="https://github.com/mintlify/mint">
+  Star the repo, file issues, and follow along with releases.
+</Card>
+
+For internal links you can use either a root-relative path (`/quickstart`) or a path relative to the current file (`../quickstart`). Root-relative paths are less fragile when you reorganise your folder structure, so prefer them.
+
+## Comparing Link Types
+
+Use this table to pick the right link pattern for each situation in your docs.
+
+| Link Type | Use Case | Syntax | Appearance |
+|---|---|---|---|
+| **Inline Link** | Secondary reference within prose | `[text](url)` | Underlined anchor text in body copy |
+| **Card Link** | Primary CTA, navigation hub, featured resource | `<Card href="...">` | Bordered card with title, icon, and description |
+| **Navbar Button** | Top-level site-wide actions (e.g. "Sign Up") | Configured in `docs.json` under `topbarCtaButton` | Filled button in the top navigation bar |
+
+<Warning>
+  Avoid placing too many CTAs on a single page. When every section ends with a card grid, readers lose the sense of priority and are less likely to click any of them. Aim for **one primary CTA per page** and use inline links for everything else.
+</Warning>
