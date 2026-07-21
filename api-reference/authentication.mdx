@@ -1,7 +1,7 @@
 ---
-title: "Authenticate API Requests with Bearer Tokens"
+title: "Docs API Authentication: API Keys and Bearer Tokens"
 sidebarTitle: "Authentication"
-description: "Generate an API key from your Mintlify dashboard and pass it as a Bearer token in the Authorization header on every API request."
+description: "Learn how to generate a Docs API key, authenticate requests using the Bearer token scheme, handle 401 and 403 errors, and store keys safely."
 ---
 
 The Docs API authenticates every request using API keys passed as Bearer tokens in the `Authorization` header. There are no sessions, cookies, or OAuth flows — each request is independently authenticated, making the API safe to call from any environment including CI pipelines, serverless functions, and backend services.

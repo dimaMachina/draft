@@ -20,7 +20,7 @@ A single `<Card>` works well for highlighting one feature or linking to a key re
   Get your Mintlify documentation site up and running in under five minutes.
 </Card>
 
-```mdx Single Card
+```jsx Single Card
 <Card
   title="Quickstart Guide"
   icon="rocket"
@@ -51,7 +51,7 @@ Use `<CardGroup cols={2}>` to create a navigation hub with evenly spaced link ca
   </Card>
 </CardGroup>
 
-```mdx 2-Column Navigation Grid
+```jsx 2-Column Navigation Grid
 <CardGroup cols={2}>
   <Card title="Components" icon="puzzle-piece" href="/components/cards">
     Explore all interactive UI components available in Mintlify MDX pages.
@@ -95,7 +95,7 @@ Use `<CardGroup cols={3}>` when you have six or more short feature cards. This d
   </Card>
 </CardGroup>
 
-```mdx 3-Column Feature Overview
+```jsx 3-Column Feature Overview
 <CardGroup cols={3}>
   <Card title="MDX Support" icon="file-code">
     Write documentation in MDX and mix Markdown with powerful React components.
@@ -128,7 +128,7 @@ Omit the `href` prop to create an informational card that doesn't navigate anywh
   Mintlify requires **Node.js 19.00 or higher**. Run `node -v` to check your current version before installing the CLI.
 </Card>
 
-```mdx Informational Card
+```jsx Informational Card
 <Card title="Required Node.js Version" icon="circle-info">
   Mintlify requires **Node.js 19.00 or higher**. Run `node -v` to check your
   current version before installing the CLI.
@@ -149,7 +149,7 @@ Replace the icon with a custom image by passing a URL to the `img` prop. Image c
   The documentation platform built for developer experience. Beautiful by default, powerful by design.
 </Card>
 
-```mdx Card With a Custom Image
+```jsx Card With a Custom Image
 <Card
   title="Mintlify Documentation Platform"
   img="https://mintlify.com/logo/light.svg"

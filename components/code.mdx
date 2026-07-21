@@ -1,5 +1,5 @@
 ---
-title: "Code Blocks: Syntax Highlighting and Meta Options"
+title: "Code Blocks: Syntax Highlighting, Titles, and Meta Options"
 sidebarTitle: "Code Blocks"
 description: "Add syntax-highlighted code blocks with titles, line numbers, diff markers, line focus, and multi-language CodeGroup tabs to your docs."
 ---
@@ -22,7 +22,7 @@ console.log(greet("world"));
 
 **Source:**
 
-````mdx Basic code block
+````jsx Basic code block
 ```javascript
 function greet(name) {
   return `Hello, ${name}!`;
@@ -49,7 +49,7 @@ print(f"Tax owed: ${total}")
 
 **Source:**
 
-````mdx Code block with title
+````jsx Code block with title
 ```python src/main.py
 def calculate_tax(amount: float, rate: float) -> float:
     """Calculate tax for a given amount and rate."""
@@ -83,7 +83,7 @@ app.listen(PORT, () => {
 
 **Source:**
 
-````mdx Line numbers
+````jsx Line numbers
 ```javascript index.js lines
 import express from "express";
 
@@ -126,7 +126,7 @@ export function verifyToken(token: string): object | null {
 
 **Source:**
 
-````mdx Highlighted lines
+````jsx Highlighted lines
 ```typescript utils/auth.ts lines highlight={5,9-11}
 import jwt from "jsonwebtoken";
 
@@ -170,7 +170,7 @@ print(f"Accuracy: {score:.2%}")
 
 **Source:**
 
-````mdx Focused lines
+````jsx Focused lines
 ```python pipeline.py focus={6-9}
 import pandas as pd
 from sklearn.pipeline import Pipeline
@@ -228,7 +228,7 @@ Add the `expandable` meta option to collapse a long code block behind a "Show mo
 
 **Source:**
 
-````mdx Expandable code block
+````jsx Expandable code block
 ```json package.json expandable
 {
   "name": "my-app",
@@ -257,7 +257,7 @@ export default {
 
 **Source:**
 
-````mdx Diff markers
+````jsx Diff markers
 ```javascript config.js
 export default {
   host: "localhost", // [!code --]
@@ -314,7 +314,7 @@ curl -X POST https://api.example.com/v1/users \
 
 **Source:**
 
-````mdx CodeGroup
+````jsx CodeGroup
 <CodeGroup>
 ```javascript Node.js
 const response = await fetch("https://api.example.com/v1/users", {
@@ -381,7 +381,7 @@ curl "https://api.example.com/v1/items?limit=10" \
 
 **Source:**
 
-````mdx CodeGroup dropdown
+````jsx CodeGroup dropdown
 <CodeGroup dropdown>
 ```javascript Node.js
 ...

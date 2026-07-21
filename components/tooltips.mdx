@@ -1,7 +1,7 @@
 ---
-title: "Tooltips: Inline Definitions and Hover Hints"
+title: "Tooltips: Inline Hover Definitions for Mintlify Docs Pages"
 sidebarTitle: "Tooltips"
-description: "Add inline tooltip definitions to technical terms in your Mintlify docs so readers get instant context without leaving the page."
+description: "Add inline tooltip definitions to technical terms in your Mintlify docs so readers get instant context without ever leaving the page."
 ---
 
 Tooltips let you embed a short definition directly inside your prose so readers can hover over an unfamiliar term and get an instant explanation — without navigating away from the page or hunting through a separate glossary. In Mintlify, a tooltip is a single `<Tooltip>` component that wraps any word or phrase and accepts your definition through the `tip` prop.
@@ -10,7 +10,7 @@ Tooltips let you embed a short definition directly inside your prose so readers 
 
 Wrap the term you want to annotate in a `<Tooltip>` tag and pass your definition to the `tip` prop. Keep the definition short — one phrase or sentence is ideal.
 
-```mdx title="Basic Tooltip usage"
+```jsx title="Basic Tooltip usage"
 Use <Tooltip tip="A markup language for writing Mintlify docs">MDX</Tooltip> to write your pages.
 ```
 
@@ -24,7 +24,7 @@ Hover over the highlighted word above to see the tooltip appear. The wrapped tex
 
 Tooltips shine when you are writing a technically dense paragraph and want to keep it readable for both experts and newcomers. Rather than adding a footnote or breaking the flow with a parenthetical, you annotate each term in place.
 
-```mdx title="Multiple tooltips in a paragraph"
+```jsx title="Multiple tooltips in a paragraph"
 Every Mintlify page is an <Tooltip tip="MDX is Markdown with embedded JSX components">MDX</Tooltip> file
 that begins with a <Tooltip tip="A YAML block at the top of a file that sets page metadata like title and description">frontmatter</Tooltip> block.
 Inside the file you compose your content using built-in
@@ -53,12 +53,12 @@ Both tooltips and links give readers access to more information, but they serve 
 | Acronym or jargon with a universally short expansion | `<Tooltip>` — the expansion is the whole definition |
 | A concept the reader must understand to continue safely | Inline callout (`<Warning>` or `<Note>`) — don't hide critical info in a hover |
 
-```mdx title="Tooltip vs page link — choosing the right pattern"
+```jsx title="Tooltip vs page link — choosing the right pattern"
 {/* ✅ Good use of tooltip — short, self-contained definition */}
 Configure your <Tooltip tip="A JSON file at the root of your project that controls navigation and theme">docs.json</Tooltip> file.
 
 {/* ✅ Good use of link — the concept deserves a full explanation */}
-Learn how [custom domains](/settings/custom-domain) work before you go live.
+Learn how [API authentication](/api-reference/authentication) works before you go live.
 ```
 
 ## Tooltip Best Practices
@@ -67,7 +67,7 @@ Learn how [custom domains](/settings/custom-domain) work before you go live.
   <Accordion title="Keep tooltip text under 80 characters">
     Tooltip bubbles are narrow. If your definition runs longer than roughly 80 characters it will wrap awkwardly or overflow on smaller screens. Edit ruthlessly: strip articles, cut examples, and reduce to the single most useful fact. If you cannot fit the definition in 80 characters, the concept probably deserves its own page.
 
-    ```mdx title="Short vs long tooltip text"
+    ```jsx title="Short vs long tooltip text"
     {/* ✅ Concise — fits comfortably in the bubble */}
     <Tooltip tip="A reusable JSX element embedded in MDX">component</Tooltip>
 
@@ -79,7 +79,7 @@ Learn how [custom domains](/settings/custom-domain) work before you go live.
   <Accordion title="Use tooltips for jargon, acronyms, and technical terms">
     Tooltips work best on terms that are opaque to a subset of your audience but obvious to others — acronyms like `MDX`, `YAML`, or `SDK`, domain-specific jargon like "frontmatter" or "slug", and product-specific concepts unique to your platform. Avoid adding tooltips to plain English words that any reader will understand — it creates noise and trains readers to ignore the highlights.
 
-    ```mdx title="Good tooltip candidates"
+    ```jsx title="Good tooltip candidates"
     Your <Tooltip tip="Application Programming Interface — a set of endpoints your code calls">API</Tooltip> key is scoped per workspace.
 
     Set the <Tooltip tip="How long a browser caches a response, in seconds">TTL</Tooltip> to 3600 for hourly expiry.
@@ -89,7 +89,7 @@ Learn how [custom domains](/settings/custom-domain) work before you go live.
   <Accordion title="Don't use tooltips for critical information">
     A reader who misses a tooltip hover misses the information entirely. Never put safety warnings, destructive action notices, required configuration steps, or anything labelled "important" inside a tooltip. Use a `<Warning>` or `<Note>` callout for content the reader must see.
 
-    ```mdx title="Critical info belongs in a callout, not a tooltip"
+    ```jsx title="Critical info belongs in a callout, not a tooltip"
     {/* ❌ Critical warning hidden in a tooltip — easy to miss */}
     Click <Tooltip tip="This action is irreversible and deletes all data">Delete</Tooltip>.
 
@@ -103,12 +103,12 @@ Learn how [custom domains](/settings/custom-domain) work before you go live.
   <Accordion title="Prefer a link to a full page for complex concepts">
     When a concept has nuance, exceptions, or requires examples to understand properly, a tooltip will under-explain it and may actively mislead readers who take the short definition too literally. In those cases, link to a dedicated page or an `<Accordion>` that has the space to do the concept justice.
 
-    ```mdx title="Link instead of tooltip for complex concepts"
+    ```jsx title="Link instead of tooltip for complex concepts"
     {/* ❌ Over-simplified tooltip for a complex topic */}
-    <Tooltip tip="Controls how your site looks">mint.json</Tooltip>
+    <Tooltip tip="Controls how your site looks">docs.json</Tooltip>
 
     {/* ✅ Link to the full reference */}
-    See the [`docs.json` reference](/settings/global) for every available configuration option.
+    See the [API reference overview](/api-reference/overview) for every available endpoint and configuration option.
     ```
   </Accordion>
 </AccordionGroup>

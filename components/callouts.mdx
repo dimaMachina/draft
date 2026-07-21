@@ -1,5 +1,5 @@
 ---
-title: "Callout Components: Notes, Tips, Warnings & More"
+title: "Callout Components: Note, Tip, Warning, Danger & More"
 sidebarTitle: "Callouts"
 description: "Use Mintlify callout components — Note, Tip, Warning, Danger, Info, and Check — to highlight important information in your docs."
 ---
@@ -18,7 +18,7 @@ Use `<Note>` when you want to surface important context that readers should keep
 
 **Source:**
 
-```mdx Note example
+```jsx Note example
 <Note>
   Mintlify automatically reloads your docs preview whenever you save a file.
   You don't need to restart the dev server between edits.
@@ -37,7 +37,7 @@ Use `<Tip>` to share best practices, shortcuts, or recommendations that help rea
 
 **Source:**
 
-```mdx Tip example
+```jsx Tip example
 <Tip>
   Keep your `docs.json` navigation in sync with your file structure. Running
   `mintlify dev` will warn you about any pages that are missing from the nav.
@@ -56,7 +56,7 @@ Use `<Warning>` when an action or configuration could lead to unintended consequ
 
 **Source:**
 
-```mdx Warning example
+```jsx Warning example
 <Warning>
   Renaming a page's slug changes its public URL. Any external links pointing
   to the old URL will return a 404 unless you add a redirect in `docs.json`.
@@ -75,7 +75,7 @@ Use `<Danger>` for actions that are irreversible or that could cause serious har
 
 **Source:**
 
-```mdx Danger example
+```jsx Danger example
 <Danger>
   Rotating your API secret key immediately invalidates all existing tokens.
   Every integration using the old key will stop working until it is updated.
@@ -95,7 +95,7 @@ Use `<Info>` to provide supplemental background, definitions, or contextual deta
 
 **Source:**
 
-```mdx Info example
+```jsx Info example
 <Info>
   Mintlify uses MDX under the hood, which means every `.mdx` file supports
   both standard Markdown syntax and JSX-style React components side by side.
@@ -114,7 +114,7 @@ Use `<Check>` to confirm that a step was completed successfully, to mark the end
 
 **Source:**
 
-```mdx Check example
+```jsx Check example
 <Check>
   **Setup complete!** Your Mintlify project is now running locally at
   `http://localhost:3000`. Every change you save will appear in the preview instantly.

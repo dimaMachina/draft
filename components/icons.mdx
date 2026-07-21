@@ -1,7 +1,7 @@
 ---
 title: "Icons: Font Awesome Icons in Cards and Code Blocks"
 sidebarTitle: "Icons"
-description: "Use Font Awesome icon names in Card, Accordion, Step, and code block components to add visual hierarchy and scannable navigation."
+description: "Use Font Awesome icon names in Mintlify Card, Accordion, and code block components to add visual anchors and improve navigation scannability."
 ---
 
 Mintlify uses [Font Awesome 6](https://fontawesome.com/icons) as its icon library. Wherever a Mintlify component accepts an `icon` prop, pass the kebab-case name of any Font Awesome icon — for example `"rocket"`, `"bolt"`, or `"puzzle-piece"` — and Mintlify renders the corresponding glyph automatically. Icons are entirely optional, but they give readers visual anchors that make long navigation lists and reference pages significantly easier to scan.
@@ -35,7 +35,7 @@ Pass the `icon` prop on any `<Card>` to display an icon above the card title. Us
   </Card>
 </CardGroup>
 
-```mdx title="Cards with icons"
+```jsx title="Cards with icons"
 <CardGroup cols={3}>
   <Card title="Getting Started" icon="rocket">
     Ship your first doc in minutes with Mintlify's quickstart guide.
@@ -74,7 +74,7 @@ Add `icon` to any `<Accordion>` to display an icon next to the accordion's title
   </Accordion>
 </AccordionGroup>
 
-```mdx title="Accordions with icons"
+```jsx title="Accordions with icons"
 <AccordionGroup>
   <Accordion title="Authentication" icon="key">
     Configure API key, OAuth 2.0, or JWT authentication for your endpoints.
@@ -95,7 +95,7 @@ Add `icon` to any `<Accordion>` to display an icon next to the accordion's title
 
 Add an `icon` meta option directly to a fenced code block to render a small icon in the code block's title bar. Combine it with `title` to give the block a labelled, visually distinct header.
 
-````mdx title="Code block with icon meta"
+````jsx title="Code block with icon meta"
 ```bash icon="terminal" title="Install the Mintlify CLI"
 npm install -g mintlify
 ```
@@ -139,7 +139,7 @@ The grid below shows nine commonly-used icons and their typical documentation us
   </Card>
 </CardGroup>
 
-```mdx title="Icon reference grid"
+```jsx title="Icon reference grid"
 <CardGroup cols={3}>
   <Card title="rocket" icon="rocket">
     Getting Started — onboarding, quickstart, and first-run flows.

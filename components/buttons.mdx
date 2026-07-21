@@ -1,5 +1,5 @@
 ---
-title: "Buttons and Links: Call-to-Action Elements"
+title: "Buttons and Links: Call-to-Action Patterns in Mintlify"
 sidebarTitle: "Buttons"
 description: "Add styled button links to your Mintlify documentation using Card components and Markdown links to drive reader action and navigation."
 ---
@@ -10,7 +10,7 @@ Mintlify does not ship a dedicated `<Button>` component — instead, you drive r
 
 The most visually impactful way to surface a CTA is a `<Card>` with an `href`. Wrapping multiple cards in a `<CardGroup>` creates a clean grid of action items that naturally draws the eye. Use this pattern for primary navigation at the bottom of an overview page or at the top of a landing section.
 
-```mdx title="CTA CardGroup — 2-column grid"
+```jsx title="CTA CardGroup — 2-column grid"
 <CardGroup cols={2}>
   <Card title="Get Started" icon="rocket" href="/quickstart">
     Set up your project in under five minutes and ship your first docs page.
@@ -52,7 +52,7 @@ Here is the live example:
 
 For links woven into prose, use standard Markdown syntax. These are ideal for cross-referencing concepts mid-sentence without pulling the reader's attention away from the content.
 
-```mdx title="Inline Markdown link syntax"
+```jsx title="Inline Markdown link syntax"
 Learn how to configure your project by reading the [configuration guide](/introduction),
 or jump straight to the [component library](/components/callouts) for live examples.
 ```
@@ -65,7 +65,7 @@ Learn how to configure your project by reading the [configuration guide](/introd
 
 When you need one standout CTA — such as at the end of a tutorial — a single `<Card>` with an icon works as a large, unmissable button. Keep the title short and action-oriented.
 
-```mdx title="Single Card CTA with icon"
+```jsx title="Single Card CTA with icon"
 <Card title="Start the Quickstart →" icon="arrow-right" href="/quickstart">
   You have everything you need. Follow the quickstart to deploy your first
   Mintlify site in minutes.
@@ -80,7 +80,7 @@ When you need one standout CTA — such as at the end of a tutorial — a single
 
 Both inline links and Card `href` values support external URLs. Mintlify automatically opens external links in a new tab, so your readers never lose their place in your docs.
 
-```mdx title="Internal and external link examples"
+```jsx title="Internal and external link examples"
 {/* Internal link — stays in the same tab */}
 [View the introduction](/introduction)
 
@@ -88,7 +88,7 @@ Both inline links and Card `href` values support external URLs. Mintlify automat
 [Mintlify on GitHub](https://github.com/mintlify/mint)
 ```
 
-```mdx title="External Card link"
+```jsx title="External Card link"
 <Card title="Mintlify on GitHub" icon="github" href="https://github.com/mintlify/mint">
   Star the repo, file issues, and follow along with releases.
 </Card>

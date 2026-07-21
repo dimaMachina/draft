@@ -1,7 +1,7 @@
 ---
-title: "Images: Add Visual Content to Your Documentation"
+title: "Images: Markdown, Frame Component, and Layout Options"
 sidebarTitle: "Images"
-description: "Embed images in Mintlify docs using Markdown syntax or the Frame component for bordered, styled screenshots and diagrams."
+description: "Add images to Mintlify docs with Markdown syntax or the Frame component, including captions, border styles, and side-by-side layouts."
 ---
 
 Images make your documentation clearer and more engaging. Mintlify supports standard Markdown image syntax for quick inline images, and the `<Frame>` component when you need captions, borders, or polished screenshot presentation. Use the examples below to pick the right approach for your content.
@@ -12,7 +12,7 @@ The simplest way to embed an image is standard Markdown. Write an exclamation ma
 
 ![Mintlify logo](https://mintlify.com/logo/light.svg)
 
-```mdx title="Basic image syntax"
+```jsx title="Basic image syntax"
 ![Mintlify logo](https://mintlify.com/logo/light.svg)
 ```
 
@@ -26,7 +26,7 @@ Wrap an image in the `<Frame>` component and pass a `caption` prop to display a 
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
 
-```mdx title="Image with caption"
+```jsx title="Image with caption"
 <Frame caption="The Mintlify logo — used across documentation and marketing surfaces.">
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
@@ -40,7 +40,7 @@ Use `<Frame>` to add a rounded border and subtle shadow to any screenshot or dia
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
 
-```mdx title="Frame with rounded type"
+```jsx title="Frame with rounded type"
 <Frame type="rounded">
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
@@ -52,7 +52,7 @@ Set `type="clip"` to clip the image to the frame's border radius without adding 
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
 
-```mdx title="Frame with clip type"
+```jsx title="Frame with clip type"
 <Frame type="clip">
   ![Mintlify logo](https://mintlify.com/logo/light.svg)
 </Frame>
@@ -70,17 +70,17 @@ Display two images next to each other using `<CardGroup cols={2}>` with a `<Card
   <Card title="Light Theme" img="https://mintlify.com/logo/light.svg">
     The Mintlify logo rendered on a light background.
   </Card>
-  <Card title="Dark Theme" img="https://mintlify.com/logo/dark.svg">
+  <Card title="Dark Theme" img="https://mintlify.com/logo/light.svg">
     The Mintlify logo rendered on a dark background.
   </Card>
 </CardGroup>
 
-```mdx title="Side-by-side images with CardGroup"
+```jsx title="Side-by-side images with CardGroup"
 <CardGroup cols={2}>
   <Card title="Light Theme" img="https://mintlify.com/logo/light.svg">
     The Mintlify logo rendered on a light background.
   </Card>
-  <Card title="Dark Theme" img="https://mintlify.com/logo/dark.svg">
+  <Card title="Dark Theme" img="https://mintlify.com/logo/light.svg">
     The Mintlify logo rendered on a dark background.
   </Card>
 </CardGroup>
